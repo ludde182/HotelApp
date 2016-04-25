@@ -36,7 +36,7 @@ namespace HotelApp.Controller
 
         }
 
-        public bool CreateReservation(string cPnr, string cabinNo, string week)
+        public bool CreateReservation(string cPnr, int cabinNo, int week)
         {
 
             return dal.CreateReservation(cPnr, cabinNo, week);
@@ -52,6 +52,12 @@ namespace HotelApp.Controller
         {
             return dal.GetReservationByResId(resID);
         }
+        public bool CheckReservation(int cabinNo, int rWeek)
+        {
+            return dal.CheckReservation(cabinNo, rWeek);
+        }
+
+
     }
 
 }

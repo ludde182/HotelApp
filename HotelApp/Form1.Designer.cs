@@ -46,111 +46,120 @@
             this.resCust_lbl = new System.Windows.Forms.Label();
             this.findCust_btn = new System.Windows.Forms.Button();
             this.findCust_input = new System.Windows.Forms.TextBox();
-            this.findRes_input = new System.Windows.Forms.TextBox();
             this.findRes_btn = new System.Windows.Forms.Button();
             this.findcPnr_lbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.findRes_input = new System.Windows.Forms.TextBox();
             this.output_dataGrid = new System.Windows.Forms.DataGridView();
+            this.logoBox = new System.Windows.Forms.PictureBox();
+            this.logoBox_lbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.findRes_comboBox = new System.Windows.Forms.ComboBox();
+            this.update_btn = new System.Windows.Forms.Button();
+            this.delete_btn = new System.Windows.Forms.Button();
+            this.createRes_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resWeek_input)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output_dataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.SuspendLayout();
             // 
             // cPnr_input
             // 
-            this.cPnr_input.Location = new System.Drawing.Point(113, 122);
+            this.cPnr_input.Location = new System.Drawing.Point(243, 137);
             this.cPnr_input.Name = "cPnr_input";
-            this.cPnr_input.Size = new System.Drawing.Size(137, 20);
+            this.cPnr_input.Size = new System.Drawing.Size(159, 24);
             this.cPnr_input.TabIndex = 0;
             // 
             // cPnr_lbl
             // 
             this.cPnr_lbl.AutoSize = true;
             this.cPnr_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.cPnr_lbl.Location = new System.Drawing.Point(16, 125);
+            this.cPnr_lbl.Location = new System.Drawing.Point(154, 140);
             this.cPnr_lbl.Name = "cPnr_lbl";
-            this.cPnr_lbl.Size = new System.Drawing.Size(94, 13);
+            this.cPnr_lbl.Size = new System.Drawing.Size(83, 17);
             this.cPnr_lbl.TabIndex = 1;
-            this.cPnr_lbl.Text = "Personal Number: ";
+            this.cPnr_lbl.Text = "Customer ID:";
             // 
             // cName_lbl
             // 
             this.cName_lbl.AutoSize = true;
             this.cName_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.cName_lbl.Location = new System.Drawing.Point(72, 163);
+            this.cName_lbl.Location = new System.Drawing.Point(191, 189);
             this.cName_lbl.Name = "cName_lbl";
-            this.cName_lbl.Size = new System.Drawing.Size(38, 13);
+            this.cName_lbl.Size = new System.Drawing.Size(46, 17);
             this.cName_lbl.TabIndex = 3;
             this.cName_lbl.Text = "Name:";
             // 
             // cName_input
             // 
-            this.cName_input.Location = new System.Drawing.Point(113, 160);
+            this.cName_input.Location = new System.Drawing.Point(243, 186);
             this.cName_input.Name = "cName_input";
-            this.cName_input.Size = new System.Drawing.Size(137, 20);
+            this.cName_input.Size = new System.Drawing.Size(159, 24);
             this.cName_input.TabIndex = 2;
             // 
             // cMail_lbl
             // 
             this.cMail_lbl.AutoSize = true;
             this.cMail_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.cMail_lbl.Location = new System.Drawing.Point(75, 201);
+            this.cMail_lbl.Location = new System.Drawing.Point(195, 238);
             this.cMail_lbl.Name = "cMail_lbl";
-            this.cMail_lbl.Size = new System.Drawing.Size(35, 13);
+            this.cMail_lbl.Size = new System.Drawing.Size(42, 17);
             this.cMail_lbl.TabIndex = 5;
             this.cMail_lbl.Text = "Email:";
-            this.cMail_lbl.Click += new System.EventHandler(this.label3_Click);
             // 
             // cMail_input
             // 
-            this.cMail_input.Location = new System.Drawing.Point(113, 198);
+            this.cMail_input.Location = new System.Drawing.Point(243, 235);
             this.cMail_input.Name = "cMail_input";
-            this.cMail_input.Size = new System.Drawing.Size(137, 20);
+            this.cMail_input.Size = new System.Drawing.Size(159, 24);
             this.cMail_input.TabIndex = 4;
-            this.cMail_input.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // regCust_btn
             // 
-            this.regCust_btn.Location = new System.Drawing.Point(113, 249);
+            this.regCust_btn.Location = new System.Drawing.Point(243, 284);
             this.regCust_btn.Name = "regCust_btn";
-            this.regCust_btn.Size = new System.Drawing.Size(137, 26);
+            this.regCust_btn.Size = new System.Drawing.Size(159, 34);
             this.regCust_btn.TabIndex = 6;
             this.regCust_btn.Text = "Register Customer";
             this.regCust_btn.UseVisualStyleBackColor = true;
-            this.regCust_btn.Click += new System.EventHandler(this.button1_Click);
+            this.regCust_btn.Click += new System.EventHandler(this.regCust_btn_Click);
             // 
             // label4
             // 
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label4.Location = new System.Drawing.Point(277, 27);
+            this.label4.Location = new System.Drawing.Point(424, 14);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(2, 420);
+            this.label4.Size = new System.Drawing.Size(2, 550);
             this.label4.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label5.Location = new System.Drawing.Point(581, 27);
+            this.label5.Location = new System.Drawing.Point(759, 14);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(2, 420);
+            this.label5.Size = new System.Drawing.Size(2, 550);
             this.label5.TabIndex = 9;
             // 
             // resCabin_comboBox
             // 
             this.resCabin_comboBox.FormattingEnabled = true;
-            this.resCabin_comboBox.Location = new System.Drawing.Point(384, 160);
+            this.resCabin_comboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.resCabin_comboBox.Location = new System.Drawing.Point(572, 189);
             this.resCabin_comboBox.Name = "resCabin_comboBox";
-            this.resCabin_comboBox.Size = new System.Drawing.Size(121, 21);
+            this.resCabin_comboBox.Size = new System.Drawing.Size(159, 25);
             this.resCabin_comboBox.TabIndex = 10;
+            resCabin_comboBox.SelectedIndex = 0;
             // 
             // resCabin_lbl
             // 
             this.resCabin_lbl.AutoSize = true;
             this.resCabin_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.resCabin_lbl.Location = new System.Drawing.Point(311, 164);
+            this.resCabin_lbl.Location = new System.Drawing.Point(484, 192);
             this.resCabin_lbl.Name = "resCabin_lbl";
-            this.resCabin_lbl.Size = new System.Drawing.Size(70, 13);
+            this.resCabin_lbl.Size = new System.Drawing.Size(82, 17);
             this.resCabin_lbl.TabIndex = 11;
             this.resCabin_lbl.Text = "Select Cabin:";
             // 
@@ -158,15 +167,15 @@
             // 
             this.resWeek_lbl.AutoSize = true;
             this.resWeek_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.resWeek_lbl.Location = new System.Drawing.Point(311, 201);
+            this.resWeek_lbl.Location = new System.Drawing.Point(486, 240);
             this.resWeek_lbl.Name = "resWeek_lbl";
-            this.resWeek_lbl.Size = new System.Drawing.Size(72, 13);
+            this.resWeek_lbl.Size = new System.Drawing.Size(80, 17);
             this.resWeek_lbl.TabIndex = 12;
             this.resWeek_lbl.Text = "Select Week:";
             // 
             // resWeek_input
             // 
-            this.resWeek_input.Location = new System.Drawing.Point(386, 198);
+            this.resWeek_input.Location = new System.Drawing.Point(572, 238);
             this.resWeek_input.Maximum = new decimal(new int[] {
             52,
             0,
@@ -178,7 +187,7 @@
             0,
             0});
             this.resWeek_input.Name = "resWeek_input";
-            this.resWeek_input.Size = new System.Drawing.Size(65, 20);
+            this.resWeek_input.Size = new System.Drawing.Size(89, 24);
             this.resWeek_input.TabIndex = 13;
             this.resWeek_input.Value = new decimal(new int[] {
             1,
@@ -188,9 +197,9 @@
             // 
             // checkAvail_btn
             // 
-            this.checkAvail_btn.Location = new System.Drawing.Point(384, 249);
+            this.checkAvail_btn.Location = new System.Drawing.Point(572, 284);
             this.checkAvail_btn.Name = "checkAvail_btn";
-            this.checkAvail_btn.Size = new System.Drawing.Size(137, 26);
+            this.checkAvail_btn.Size = new System.Drawing.Size(159, 34);
             this.checkAvail_btn.TabIndex = 14;
             this.checkAvail_btn.Text = "Check Availability";
             this.checkAvail_btn.UseVisualStyleBackColor = true;
@@ -198,115 +207,167 @@
             // 
             // resCust_input
             // 
-            this.resCust_input.Location = new System.Drawing.Point(384, 125);
+            this.resCust_input.Location = new System.Drawing.Point(572, 140);
             this.resCust_input.Name = "resCust_input";
-            this.resCust_input.Size = new System.Drawing.Size(137, 20);
+            this.resCust_input.Size = new System.Drawing.Size(159, 24);
             this.resCust_input.TabIndex = 15;
             // 
             // resCust_lbl
             // 
             this.resCust_lbl.AutoSize = true;
             this.resCust_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.resCust_lbl.Location = new System.Drawing.Point(327, 129);
+            this.resCust_lbl.Location = new System.Drawing.Point(483, 143);
             this.resCust_lbl.Name = "resCust_lbl";
-            this.resCust_lbl.Size = new System.Drawing.Size(54, 13);
+            this.resCust_lbl.Size = new System.Drawing.Size(83, 17);
             this.resCust_lbl.TabIndex = 16;
-            this.resCust_lbl.Text = "Customer:";
+            this.resCust_lbl.Text = "Customer ID:";
             // 
             // findCust_btn
             // 
-            this.findCust_btn.Location = new System.Drawing.Point(113, 384);
+            this.findCust_btn.Location = new System.Drawing.Point(243, 445);
             this.findCust_btn.Name = "findCust_btn";
-            this.findCust_btn.Size = new System.Drawing.Size(137, 26);
-            this.findCust_btn.TabIndex = 17;
+            this.findCust_btn.Size = new System.Drawing.Size(159, 34);
+            this.findCust_btn.TabIndex = 19;
             this.findCust_btn.Text = "Find Customer";
             this.findCust_btn.UseVisualStyleBackColor = true;
             this.findCust_btn.Click += new System.EventHandler(this.findCust_btn_Click);
             // 
             // findCust_input
             // 
-            this.findCust_input.Location = new System.Drawing.Point(113, 347);
+            this.findCust_input.Location = new System.Drawing.Point(243, 396);
             this.findCust_input.Name = "findCust_input";
-            this.findCust_input.Size = new System.Drawing.Size(137, 20);
+            this.findCust_input.Size = new System.Drawing.Size(159, 24);
             this.findCust_input.TabIndex = 18;
-            this.findCust_input.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // findRes_input
-            // 
-            this.findRes_input.Location = new System.Drawing.Point(384, 347);
-            this.findRes_input.Name = "findRes_input";
-            this.findRes_input.Size = new System.Drawing.Size(137, 20);
-            this.findRes_input.TabIndex = 20;
             // 
             // findRes_btn
             // 
-            this.findRes_btn.Location = new System.Drawing.Point(384, 384);
+            this.findRes_btn.Location = new System.Drawing.Point(572, 445);
             this.findRes_btn.Name = "findRes_btn";
-            this.findRes_btn.Size = new System.Drawing.Size(137, 26);
+            this.findRes_btn.Size = new System.Drawing.Size(159, 34);
             this.findRes_btn.TabIndex = 19;
             this.findRes_btn.Text = "Find Reservation";
             this.findRes_btn.UseVisualStyleBackColor = true;
+            this.findRes_btn.Click += new System.EventHandler(this.findRes_btn_Click);
             // 
             // findcPnr_lbl
             // 
             this.findcPnr_lbl.AutoSize = true;
             this.findcPnr_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.findcPnr_lbl.Location = new System.Drawing.Point(16, 350);
+            this.findcPnr_lbl.Location = new System.Drawing.Point(154, 400);
             this.findcPnr_lbl.Name = "findcPnr_lbl";
-            this.findcPnr_lbl.Size = new System.Drawing.Size(94, 13);
+            this.findcPnr_lbl.Size = new System.Drawing.Size(83, 17);
             this.findcPnr_lbl.TabIndex = 21;
-            this.findcPnr_lbl.Text = "Personal Number: ";
+            this.findcPnr_lbl.Text = "Customer ID:";
             // 
-            // label1
+            // findRes_input
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(287, 350);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Personal Number: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(287, 306);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 13);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "Personal Number: ";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(384, 303);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(137, 20);
-            this.textBox1.TabIndex = 23;
+            this.findRes_input.Location = new System.Drawing.Point(572, 397);
+            this.findRes_input.Name = "findRes_input";
+            this.findRes_input.Size = new System.Drawing.Size(159, 24);
+            this.findRes_input.TabIndex = 23;
             // 
             // output_dataGrid
             // 
-            this.output_dataGrid.BackgroundColor = System.Drawing.Color.PeachPuff;
+            this.output_dataGrid.BackgroundColor = System.Drawing.Color.SeaShell;
             this.output_dataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.output_dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.output_dataGrid.Location = new System.Drawing.Point(586, 125);
+            this.output_dataGrid.Location = new System.Drawing.Point(786, 140);
             this.output_dataGrid.Name = "output_dataGrid";
-            this.output_dataGrid.Size = new System.Drawing.Size(371, 198);
+            this.output_dataGrid.Size = new System.Drawing.Size(433, 289);
             this.output_dataGrid.TabIndex = 25;
+            // 
+            // logoBox
+            // 
+            this.logoBox.BackColor = System.Drawing.Color.Transparent;
+            this.logoBox.BackgroundImage = global::HotelApp.Properties.Resources.logo;
+            this.logoBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.logoBox.Location = new System.Drawing.Point(2, 0);
+            this.logoBox.Name = "logoBox";
+            this.logoBox.Size = new System.Drawing.Size(112, 108);
+            this.logoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.logoBox.TabIndex = 26;
+            this.logoBox.TabStop = false;
+            // 
+            // logoBox_lbl
+            // 
+            this.logoBox_lbl.AutoSize = true;
+            this.logoBox_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.logoBox_lbl.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.logoBox_lbl.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.logoBox_lbl.Location = new System.Drawing.Point(18, 111);
+            this.logoBox_lbl.Name = "logoBox_lbl";
+            this.logoBox_lbl.Size = new System.Drawing.Size(80, 17);
+            this.logoBox_lbl.TabIndex = 27;
+            this.logoBox_lbl.Text = "Version: 1.0";
+            // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Location = new System.Drawing.Point(1236, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(2, 550);
+            this.label1.TabIndex = 28;
+            // 
+            // findRes_comboBox
+            // 
+            this.findRes_comboBox.FormattingEnabled = true;
+            this.findRes_comboBox.Items.AddRange(new object[] {
+            "Reservation ID ",
+            "Customer ID"});
+            this.findRes_comboBox.Location = new System.Drawing.Point(445, 396);
+            this.findRes_comboBox.Name = "findRes_comboBox";
+            this.findRes_comboBox.Size = new System.Drawing.Size(121, 25);
+            this.findRes_comboBox.TabIndex = 29;
+            findRes_comboBox.SelectedIndex = 0;
+            // 
+            // update_btn
+            // 
+            this.update_btn.Location = new System.Drawing.Point(786, 445);
+            this.update_btn.Name = "update_btn";
+            this.update_btn.Size = new System.Drawing.Size(78, 34);
+            this.update_btn.TabIndex = 30;
+            this.update_btn.Text = "Update";
+            this.update_btn.UseVisualStyleBackColor = true;
+            this.update_btn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // delete_btn
+            // 
+            this.delete_btn.Location = new System.Drawing.Point(870, 445);
+            this.delete_btn.Name = "delete_btn";
+            this.delete_btn.Size = new System.Drawing.Size(78, 34);
+            this.delete_btn.TabIndex = 31;
+            this.delete_btn.Text = "Delete";
+            this.delete_btn.UseVisualStyleBackColor = true;
+            // 
+            // createRes_btn
+            // 
+            this.createRes_btn.AutoEllipsis = true;
+            this.createRes_btn.Location = new System.Drawing.Point(572, 324);
+            this.createRes_btn.Name = "createRes_btn";
+            this.createRes_btn.Size = new System.Drawing.Size(159, 34);
+            this.createRes_btn.TabIndex = 32;
+            this.createRes_btn.Text = "Create Reservation";
+            this.createRes_btn.UseVisualStyleBackColor = true;
+            this.createRes_btn.Visible = false;
+            this.createRes_btn.Click += new System.EventHandler(this.createRes_btn_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::HotelApp.Properties.Resources.bg;
-            this.ClientSize = new System.Drawing.Size(961, 466);
-            this.Controls.Add(this.output_dataGrid);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(1282, 611);
+            this.Controls.Add(this.createRes_btn);
+            this.Controls.Add(this.delete_btn);
+            this.Controls.Add(this.update_btn);
+            this.Controls.Add(this.findRes_comboBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.findcPnr_lbl);
+            this.Controls.Add(this.logoBox_lbl);
+            this.Controls.Add(this.logoBox);
+            this.Controls.Add(this.output_dataGrid);
             this.Controls.Add(this.findRes_input);
+            this.Controls.Add(this.findcPnr_lbl);
             this.Controls.Add(this.findRes_btn);
             this.Controls.Add(this.findCust_input);
             this.Controls.Add(this.findCust_btn);
@@ -326,14 +387,15 @@
             this.Controls.Add(this.cName_input);
             this.Controls.Add(this.cPnr_lbl);
             this.Controls.Add(this.cPnr_input);
+            this.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Ski Village - Booking System";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.resWeek_input)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output_dataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,13 +421,17 @@
         private System.Windows.Forms.Label resCust_lbl;
         private System.Windows.Forms.Button findCust_btn;
         private System.Windows.Forms.TextBox findCust_input;
-        private System.Windows.Forms.TextBox findRes_input;
         private System.Windows.Forms.Button findRes_btn;
         private System.Windows.Forms.Label findcPnr_lbl;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox findRes_input;
         private System.Windows.Forms.DataGridView output_dataGrid;
+        private System.Windows.Forms.PictureBox logoBox;
+        private System.Windows.Forms.Label logoBox_lbl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox findRes_comboBox;
+        private System.Windows.Forms.Button update_btn;
+        private System.Windows.Forms.Button delete_btn;
+        private System.Windows.Forms.Button createRes_btn;
     }
 }
 

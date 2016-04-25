@@ -17,7 +17,7 @@ namespace HotelApp.DAL
 
         public DAL()
         {
-            con.ConnectionString = "user id=root;" +
+            con.ConnectionString = "user id=sa;" +
                                                       "password=root;server=localhost;" +
                                                       "Trusted_Connection=yes;" +
                                                       "database=database; " +
@@ -58,13 +58,13 @@ namespace HotelApp.DAL
         }
 
 
-        public bool CreateReservation(string cPnr, string cabinNo, string week)
+        public bool CreateReservation(string cPnr, int cabinNo, int week)
         {
             con.Open();
             bool b = true;
             try
             {
-                string query = ("insert into Reservation values  (@cPnr, @cabinNo, @week) ");
+                string query = ("insert into Reservation(cPnr, cabinNo, rWeek) values (@cPnr, @cabinNo, @week) ");
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@cPnr", cPnr);
@@ -220,6 +220,35 @@ namespace HotelApp.DAL
                 {
                     b = false;
                 }
+                con.Close();
+            }
+            return b;
+        }
+
+        public bool CheckReservation(int cabinNo, int rWeek)
+        {
+            bool b = false;
+            try
+            {
+                con.Open();
+                string query = ("SELECT * FROM Reservation WHERE cabinNo = @cabinNo AND rWeek = @rWeek  ");
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cabinNo", cabinNo);
+                cmd.Parameters.AddWithValue("@rWeek", rWeek);
+                var result = cmd.ExecuteNonQuery();
+                if (result < 0)
+                    b = true;
+                else if (result > 0)
+                    b = false;
+
+                con.Close();
+            }
+
+            catch (SqlException sqlEx)
+            {
+                sqlEx.Message.StartsWith("The INSERT statement conflicted");
+                System.Windows.Forms.MessageBox.Show("Database error" + sqlEx.ToString());
+                b = false;
                 con.Close();
             }
             return b;

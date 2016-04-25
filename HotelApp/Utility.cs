@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HotelApp.DAL;
 using HotelApp.Controller;
 using System.Data;
+using HotelApp;
 
 namespace HotelApp
 {
@@ -13,8 +14,8 @@ namespace HotelApp
     {
         private Controller.Controller ctrl = new Controller.Controller();
 
-        public void searchCustomer(string s) {
-            ctrl.GetCustomerByCpnr(s);
+        public void createCustomer() {
+            
         }
 
         public void updateCustomer(DataTable dt) {
