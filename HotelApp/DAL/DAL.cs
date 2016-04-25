@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using HotelApp.DAL;
-using HotelApp.Model;
-
+using System.Data;
 
 namespace HotelApp.DAL
 {
@@ -18,22 +17,28 @@ namespace HotelApp.DAL
 
         public DAL()
         {
-            con.ConnectionString = "user id=sa;" +
-                                                      "password=root;server=DESKTOP-LAMR8JS;" +
+            con.ConnectionString = "user id=root;" +
+                                                      "password=root;server=localhost;" +
                                                       "Trusted_Connection=yes;" +
                                                       "database=database; " +
                                                       "connection timeout=30";
         }
 
-        public bool CreateCustomer(Customer c)
+        public bool CreateCustomer(String cPnr, String cName, String cMail)
         {
 
             bool b = false;
             try
             {
                 con.Open();
-                string query = ("insert into Customer values ('" + c.cPnr + "', '" + c.cName + "', '" + c.cMail + "') ");
+                string query = ("insert into Customer values (@cPnr, @cName, @cMail) ");
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cPnr", cPnr);
+                cmd.Parameters.AddWithValue("@cName", cName);
+                cmd.Parameters.AddWithValue("@cMail", cMail);
+                //  SqlParameter param = new SqlParameter();
+                //  param.Value = "MIt värder";
+                //  param.ParameterName = "@cPnr";
                 cmd.ExecuteReader();
                 b = true;
                 con.Close();
@@ -53,15 +58,18 @@ namespace HotelApp.DAL
         }
 
 
-        public bool CreateReservation(string cPnr, int cabinNo, int week)
+        public bool CreateReservation(string cPnr, string cabinNo, string week)
         {
             con.Open();
             bool b = true;
             try
             {
-                string query = ("insert into Reservation values  ('" + cPnr + "', '" + cabinNo + "', '" + week + "') ");
+                string query = ("insert into Reservation values  (@cPnr, @cabinNo, @week) ");
 
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cPnr", cPnr);
+                cmd.Parameters.AddWithValue("@cabinNo", cabinNo);
+                cmd.Parameters.AddWithValue("@week", week);
                 cmd.ExecuteReader();
                 b = true;
                 con.Close();
@@ -77,14 +85,17 @@ namespace HotelApp.DAL
             return b;
         }
 
-        public SqlDataAdapter GetAllCustomers()
+        public DataTable GetAllCustomers()
         {
             try
             {
                 con.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select * from Customer", con);
+                string query = ("select * from Customer");
+                SqlDataAdapter da = new SqlDataAdapter(query, con);
+                DataTable table = new DataTable();
+                da.Fill(table);
                 con.Close();
-                return da;
+                return table;
             }
             catch (SqlException sqlEx)
             {
@@ -93,14 +104,20 @@ namespace HotelApp.DAL
             }
         }
 
-        public SqlDataAdapter GetCustomerByCpnr(string cpnr)
+        public DataTable GetCustomerByCpnr(string cPnr)
         {
             try
             {
+
                 con.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select * from customer where cPnr = '" + cpnr + "'", con);
+                string query = ("select* from Customer where cPnr = @cPnr");
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cPnr", cPnr);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                da.Fill(table);
                 con.Close();
-                return da;
+                return table;
             }
             catch (SqlException sqlEx)
             {
@@ -109,14 +126,19 @@ namespace HotelApp.DAL
             }
         }
 
-        public SqlDataAdapter GetReservationByCpnr(string cpnr)
+        public DataTable GetReservationByCpnr(string cPnr)
         {
             try
             {
                 con.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select * from reservation where cPnr = '" + cpnr + "'", con);
+                string query = ("Select * from reservation where cPnr = @cPnr");
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cPnr", cPnr);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                da.Fill(table);
                 con.Close();
-                return da;
+                return table;
             }
             catch (SqlException sqlEx)
             {
@@ -125,14 +147,19 @@ namespace HotelApp.DAL
             }
         }
 
-        public SqlDataAdapter GetReservationByResId(string resId)
+        public DataTable GetReservationByResId(string resID)
         {
             try
             {
                 con.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select * from reservation where resId = '" + resId + "'", con);
+                string query = ("Select * from reservation where resID = @resID");
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@resID", resID);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                da.Fill(table);
                 con.Close();
-                return da;
+                return table;
             }
             catch (SqlException sqlEx)
             {
@@ -147,9 +174,9 @@ namespace HotelApp.DAL
             try
             {
                 con.Open();
-                string query = "DELETE FROM Customer WHERE cPnr =  '" + cPnr + "'";
-
+                string query = ("DELETE FROM Customer WHERE cPnr =  @cPnr");
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cPnr", cPnr);
                 cmd.ExecuteReader();
                 b = true;
                 con.Close();
@@ -160,6 +187,39 @@ namespace HotelApp.DAL
                 sqlEx.Message.StartsWith("The INSERT statement conflicted");
                 System.Windows.Forms.MessageBox.Show("Database error" + sqlEx.ToString());
                 b = false;
+                con.Close();
+            }
+            return b;
+        }
+
+        public bool UpdateCustomer(String cPnr, String cName, String cMail)
+        {
+
+            bool b = false;
+            try
+            {
+                con.Open();
+                string query = ("UPDATE Customer SET cName = @cName, cMail = @cMail WHERE cPnr = @cPnr");
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cPnr", cPnr);
+                cmd.Parameters.AddWithValue("@cName", cName);
+                cmd.Parameters.AddWithValue("@cMail", cMail);
+                //  SqlParameter param = new SqlParameter();
+                //  param.Value = "MIt värder";
+                //  param.ParameterName = "@cPnr";
+                cmd.ExecuteReader();
+                b = true;
+                con.Close();
+            }
+
+            catch (SqlException sqlEx)
+            {
+                sqlEx.Message.StartsWith("");
+                System.Windows.Forms.MessageBox.Show("You can't change the cPnr.");
+                if (sqlEx.Message.StartsWith(""))
+                {
+                    b = false;
+                }
                 con.Close();
             }
             return b;

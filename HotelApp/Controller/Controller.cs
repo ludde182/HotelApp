@@ -3,56 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using System.Data.SqlClient;
-using HotelApp;
 using HotelApp.DAL;
-using HotelApp.Model;
-
+using HotelApp;
 namespace HotelApp.Controller
 {
-
     class Controller
     {
-        private DAL.DAL dal;
 
+        private DAL.DAL dal;
         public Controller()
         {
             dal = new DAL.DAL();
         }
 
-        public SqlDataAdapter GetAllCustomers()
+        public DataTable GetAllCustomers()
         {
             return dal.GetAllCustomers();
         }
 
-        public SqlDataAdapter GetCustomerByCpnr(string cPnr)
+        public DataTable GetCustomerByCpnr(string cPnr)
         {
             return dal.GetCustomerByCpnr(cPnr);
 
         }
 
-        public bool CreateCustomer(Customer c)
+        public bool CreateCustomer(string cPnr, string cName, string cMail)
         {
 
-            return dal.CreateCustomer(c);
+            return dal.CreateCustomer(cPnr, cName, cMail);
 
         }
 
-        public bool CreateReservation(string cPnr, int cabinNo, int week)
+        public bool CreateReservation(string cPnr, string cabinNo, string week)
         {
 
             return dal.CreateReservation(cPnr, cabinNo, week);
 
         }
 
-        public SqlDataAdapter GetReservationByCpnr(string cPnr)
+        public DataTable GetReservationByCpnr(string cPnr)
         {
             return dal.GetReservationByCpnr(cPnr);
         }
 
-        public SqlDataAdapter GetReservationByResId(string resId)
+        public DataTable GetReservationByResId(string resID)
         {
-            return dal.GetReservationByResId(resId);
+            return dal.GetReservationByResId(resID);
         }
     }
+
 }
+

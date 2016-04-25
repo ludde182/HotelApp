@@ -29,28 +29,32 @@
         private void InitializeComponent()
         {
             this.cPnr_input = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.cPnr_lbl = new System.Windows.Forms.Label();
+            this.cName_lbl = new System.Windows.Forms.Label();
             this.cName_input = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.cMail_lbl = new System.Windows.Forms.Label();
             this.cMail_input = new System.Windows.Forms.TextBox();
             this.regCust_btn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
+            this.resCabin_comboBox = new System.Windows.Forms.ComboBox();
+            this.resCabin_lbl = new System.Windows.Forms.Label();
+            this.resWeek_lbl = new System.Windows.Forms.Label();
+            this.resWeek_input = new System.Windows.Forms.NumericUpDown();
+            this.checkAvail_btn = new System.Windows.Forms.Button();
             this.resCust_input = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.resCust_lbl = new System.Windows.Forms.Label();
             this.findCust_btn = new System.Windows.Forms.Button();
             this.findCust_input = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.findRes_input = new System.Windows.Forms.TextBox();
+            this.findRes_btn = new System.Windows.Forms.Button();
+            this.findcPnr_lbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.output_dataGrid = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.resWeek_input)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output_dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // cPnr_input
@@ -60,23 +64,25 @@
             this.cPnr_input.Size = new System.Drawing.Size(137, 20);
             this.cPnr_input.TabIndex = 0;
             // 
-            // label1
+            // cPnr_lbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 125);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Personal Number: ";
+            this.cPnr_lbl.AutoSize = true;
+            this.cPnr_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.cPnr_lbl.Location = new System.Drawing.Point(16, 125);
+            this.cPnr_lbl.Name = "cPnr_lbl";
+            this.cPnr_lbl.Size = new System.Drawing.Size(94, 13);
+            this.cPnr_lbl.TabIndex = 1;
+            this.cPnr_lbl.Text = "Personal Number: ";
             // 
-            // label2
+            // cName_lbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(72, 163);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Name:";
+            this.cName_lbl.AutoSize = true;
+            this.cName_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.cName_lbl.Location = new System.Drawing.Point(72, 163);
+            this.cName_lbl.Name = "cName_lbl";
+            this.cName_lbl.Size = new System.Drawing.Size(38, 13);
+            this.cName_lbl.TabIndex = 3;
+            this.cName_lbl.Text = "Name:";
             // 
             // cName_input
             // 
@@ -85,15 +91,16 @@
             this.cName_input.Size = new System.Drawing.Size(137, 20);
             this.cName_input.TabIndex = 2;
             // 
-            // label3
+            // cMail_lbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(75, 201);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Email:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.cMail_lbl.AutoSize = true;
+            this.cMail_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.cMail_lbl.Location = new System.Drawing.Point(75, 201);
+            this.cMail_lbl.Name = "cMail_lbl";
+            this.cMail_lbl.Size = new System.Drawing.Size(35, 13);
+            this.cMail_lbl.TabIndex = 5;
+            this.cMail_lbl.Text = "Email:";
+            this.cMail_lbl.Click += new System.EventHandler(this.label3_Click);
             // 
             // cMail_input
             // 
@@ -121,18 +128,6 @@
             this.label4.Size = new System.Drawing.Size(2, 420);
             this.label4.TabIndex = 7;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(615, 125);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(317, 285);
-            this.dataGridView1.TabIndex = 8;
-            // 
             // label5
             // 
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -141,62 +136,65 @@
             this.label5.Size = new System.Drawing.Size(2, 420);
             this.label5.TabIndex = 9;
             // 
-            // comboBox1
+            // resCabin_comboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(384, 160);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 10;
+            this.resCabin_comboBox.FormattingEnabled = true;
+            this.resCabin_comboBox.Location = new System.Drawing.Point(384, 160);
+            this.resCabin_comboBox.Name = "resCabin_comboBox";
+            this.resCabin_comboBox.Size = new System.Drawing.Size(121, 21);
+            this.resCabin_comboBox.TabIndex = 10;
             // 
-            // label6
+            // resCabin_lbl
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(311, 164);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Select Cabin:";
+            this.resCabin_lbl.AutoSize = true;
+            this.resCabin_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.resCabin_lbl.Location = new System.Drawing.Point(311, 164);
+            this.resCabin_lbl.Name = "resCabin_lbl";
+            this.resCabin_lbl.Size = new System.Drawing.Size(70, 13);
+            this.resCabin_lbl.TabIndex = 11;
+            this.resCabin_lbl.Text = "Select Cabin:";
             // 
-            // label7
+            // resWeek_lbl
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(311, 201);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Select Week:";
+            this.resWeek_lbl.AutoSize = true;
+            this.resWeek_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.resWeek_lbl.Location = new System.Drawing.Point(311, 201);
+            this.resWeek_lbl.Name = "resWeek_lbl";
+            this.resWeek_lbl.Size = new System.Drawing.Size(72, 13);
+            this.resWeek_lbl.TabIndex = 12;
+            this.resWeek_lbl.Text = "Select Week:";
             // 
-            // numericUpDown1
+            // resWeek_input
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(386, 198);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.resWeek_input.Location = new System.Drawing.Point(386, 198);
+            this.resWeek_input.Maximum = new decimal(new int[] {
             52,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.resWeek_input.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(65, 20);
-            this.numericUpDown1.TabIndex = 13;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.resWeek_input.Name = "resWeek_input";
+            this.resWeek_input.Size = new System.Drawing.Size(65, 20);
+            this.resWeek_input.TabIndex = 13;
+            this.resWeek_input.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // button1
+            // checkAvail_btn
             // 
-            this.button1.Location = new System.Drawing.Point(384, 249);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 26);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Check Availability";
-            this.button1.UseVisualStyleBackColor = true;
+            this.checkAvail_btn.Location = new System.Drawing.Point(384, 249);
+            this.checkAvail_btn.Name = "checkAvail_btn";
+            this.checkAvail_btn.Size = new System.Drawing.Size(137, 26);
+            this.checkAvail_btn.TabIndex = 14;
+            this.checkAvail_btn.Text = "Check Availability";
+            this.checkAvail_btn.UseVisualStyleBackColor = true;
+            this.checkAvail_btn.Click += new System.EventHandler(this.checkAvail_btn_Click);
             // 
             // resCust_input
             // 
@@ -205,14 +203,15 @@
             this.resCust_input.Size = new System.Drawing.Size(137, 20);
             this.resCust_input.TabIndex = 15;
             // 
-            // label8
+            // resCust_lbl
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(327, 129);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(54, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Customer:";
+            this.resCust_lbl.AutoSize = true;
+            this.resCust_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.resCust_lbl.Location = new System.Drawing.Point(327, 129);
+            this.resCust_lbl.Name = "resCust_lbl";
+            this.resCust_lbl.Size = new System.Drawing.Size(54, 13);
+            this.resCust_lbl.TabIndex = 16;
+            this.resCust_lbl.Text = "Customer:";
             // 
             // findCust_btn
             // 
@@ -222,6 +221,7 @@
             this.findCust_btn.TabIndex = 17;
             this.findCust_btn.Text = "Find Customer";
             this.findCust_btn.UseVisualStyleBackColor = true;
+            this.findCust_btn.Click += new System.EventHandler(this.findCust_btn_Click);
             // 
             // findCust_input
             // 
@@ -231,21 +231,68 @@
             this.findCust_input.TabIndex = 18;
             this.findCust_input.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // findRes_input
             // 
-            this.textBox2.Location = new System.Drawing.Point(384, 347);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(137, 20);
-            this.textBox2.TabIndex = 20;
+            this.findRes_input.Location = new System.Drawing.Point(384, 347);
+            this.findRes_input.Name = "findRes_input";
+            this.findRes_input.Size = new System.Drawing.Size(137, 20);
+            this.findRes_input.TabIndex = 20;
             // 
-            // button3
+            // findRes_btn
             // 
-            this.button3.Location = new System.Drawing.Point(384, 384);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(137, 26);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "Find Reservation";
-            this.button3.UseVisualStyleBackColor = true;
+            this.findRes_btn.Location = new System.Drawing.Point(384, 384);
+            this.findRes_btn.Name = "findRes_btn";
+            this.findRes_btn.Size = new System.Drawing.Size(137, 26);
+            this.findRes_btn.TabIndex = 19;
+            this.findRes_btn.Text = "Find Reservation";
+            this.findRes_btn.UseVisualStyleBackColor = true;
+            // 
+            // findcPnr_lbl
+            // 
+            this.findcPnr_lbl.AutoSize = true;
+            this.findcPnr_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.findcPnr_lbl.Location = new System.Drawing.Point(16, 350);
+            this.findcPnr_lbl.Name = "findcPnr_lbl";
+            this.findcPnr_lbl.Size = new System.Drawing.Size(94, 13);
+            this.findcPnr_lbl.TabIndex = 21;
+            this.findcPnr_lbl.Text = "Personal Number: ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(287, 350);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Personal Number: ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Location = new System.Drawing.Point(287, 306);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(94, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "Personal Number: ";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(384, 303);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(137, 20);
+            this.textBox1.TabIndex = 23;
+            // 
+            // output_dataGrid
+            // 
+            this.output_dataGrid.BackgroundColor = System.Drawing.Color.PeachPuff;
+            this.output_dataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.output_dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.output_dataGrid.Location = new System.Drawing.Point(586, 125);
+            this.output_dataGrid.Name = "output_dataGrid";
+            this.output_dataGrid.Size = new System.Drawing.Size(371, 198);
+            this.output_dataGrid.TabIndex = 25;
             // 
             // Form1
             // 
@@ -254,26 +301,30 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::HotelApp.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(961, 466);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.output_dataGrid);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.findcPnr_lbl);
+            this.Controls.Add(this.findRes_input);
+            this.Controls.Add(this.findRes_btn);
             this.Controls.Add(this.findCust_input);
             this.Controls.Add(this.findCust_btn);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.resCust_lbl);
             this.Controls.Add(this.resCust_input);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.checkAvail_btn);
+            this.Controls.Add(this.resWeek_input);
+            this.Controls.Add(this.resWeek_lbl);
+            this.Controls.Add(this.resCabin_lbl);
+            this.Controls.Add(this.resCabin_comboBox);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.regCust_btn);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cMail_lbl);
             this.Controls.Add(this.cMail_input);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cName_lbl);
             this.Controls.Add(this.cName_input);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cPnr_lbl);
             this.Controls.Add(this.cPnr_input);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -281,8 +332,8 @@
             this.Name = "Form1";
             this.Text = "Ski Village - Booking System";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resWeek_input)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output_dataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,26 +342,30 @@
         #endregion
 
         private System.Windows.Forms.TextBox cPnr_input;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label cPnr_lbl;
+        private System.Windows.Forms.Label cName_lbl;
         private System.Windows.Forms.TextBox cName_input;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label cMail_lbl;
         private System.Windows.Forms.TextBox cMail_input;
         private System.Windows.Forms.Button regCust_btn;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox resCabin_comboBox;
+        private System.Windows.Forms.Label resCabin_lbl;
+        private System.Windows.Forms.Label resWeek_lbl;
+        private System.Windows.Forms.NumericUpDown resWeek_input;
+        private System.Windows.Forms.Button checkAvail_btn;
         private System.Windows.Forms.TextBox resCust_input;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label resCust_lbl;
         private System.Windows.Forms.Button findCust_btn;
         private System.Windows.Forms.TextBox findCust_input;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox findRes_input;
+        private System.Windows.Forms.Button findRes_btn;
+        private System.Windows.Forms.Label findcPnr_lbl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView output_dataGrid;
     }
 }
 

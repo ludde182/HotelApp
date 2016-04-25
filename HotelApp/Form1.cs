@@ -28,8 +28,6 @@ namespace HotelApp
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dbDataSet.Cabin' table. You can move, or remove it, as needed.
-            this.cabinTableAdapter.Fill(this.dbDataSet.Cabin);
-
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -44,18 +42,27 @@ namespace HotelApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-                Customer c = new Customer();
-                c.cPnr = cPnr_input.Text.ToString();
-                c.cName = cName_input.Text.ToString();
-                c.cMail = cMail_input.Text.ToString();
-                ctrl.CreateCustomer(c);
-            return;
 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkAvail_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void findCust_btn_Click(object sender, EventArgs e)
+        {
+            output_dataGrid.DataSource = ctrl.GetCustomerByCpnr(findCust_input.Text).DefaultView;
         }
     }
 }
