@@ -19,6 +19,7 @@ namespace HotelApp
 
         DAL.DAL d = new DAL.DAL();
         Controller.Controller  ctrl = new Controller.Controller();
+        Utility ut = new Utility();
 
         public Form1()
         {
@@ -62,7 +63,9 @@ namespace HotelApp
 
         private void findCust_btn_Click(object sender, EventArgs e)
         {
+            DataTable dt = ctrl.GetCustomerByCpnr(findCust_input.Text);
             output_dataGrid.DataSource = ctrl.GetCustomerByCpnr(findCust_input.Text).DefaultView;
+            ut.updateCustomer(dt);
         }
     }
 }
