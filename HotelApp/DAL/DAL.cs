@@ -18,9 +18,9 @@ namespace HotelApp.DAL
         public DAL()
         {
             con.ConnectionString = "user id=root;" +
-                                                      "password=root;server=DESKTOP-LAMR8JS;" +
+                                                      "password=root;server=DESKTOP-54MVI8J\\SQLEXPRESS;" +
                                                       "Trusted_Connection=yes;" +
-                                                      "database=database; " +
+                                                      "database=test; " +
                                                       "connection timeout=30";
         }
 
@@ -78,7 +78,7 @@ namespace HotelApp.DAL
             catch (SqlException sqlEx)
             {
                 sqlEx.Message.StartsWith("The INSERT statement conflicted");
-                System.Windows.Forms.MessageBox.Show("Database error" + sqlEx.ToString());
+                System.Windows.Forms.MessageBox.Show("Reservation didn't go trough. Make sure the Customer exists in the database!");
                 b = false;
                 con.Close();
             }

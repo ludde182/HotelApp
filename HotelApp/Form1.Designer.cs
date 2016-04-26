@@ -155,6 +155,7 @@
             this.resCabin_comboBox.Name = "resCabin_comboBox";
             this.resCabin_comboBox.Size = new System.Drawing.Size(159, 25);
             this.resCabin_comboBox.TabIndex = 10;
+            resCabin_comboBox.SelectedIndex = 0;
             // 
             // resCabin_lbl
             // 
@@ -321,6 +322,7 @@
             this.findRes_comboBox.Name = "findRes_comboBox";
             this.findRes_comboBox.Size = new System.Drawing.Size(121, 25);
             this.findRes_comboBox.TabIndex = 29;
+            findRes_comboBox.SelectedIndex = 0;
             // 
             // updateCust_btn
             // 

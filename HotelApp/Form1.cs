@@ -33,15 +33,35 @@ namespace HotelApp
 
             });
             output_dataGrid.MultiSelect = false;
+
+            resCust_input.TextChanged += new EventHandler((s, e) =>
+            {
+                createRes_btn.Visible = false;
+            });
+
+            resCabin_comboBox.TextChanged += new EventHandler((s, e) =>
+            {
+                createRes_btn.Visible = false;
+            });
+
+            resWeek_input.TextChanged += new EventHandler((s, e) =>
+            {
+                createRes_btn.Visible = false;
+            });
+
         }
 
 
         private void findCust_btn_Click(object sender, EventArgs e)
         {
+            output_dataGrid.DataSource = null;
+            output_dataGrid.Rows.Clear();
             DataTable dt = ctrl.GetCustomerByCpnr(findCust_input.Text);
             output_dataGrid.DataSource = ctrl.GetCustomerByCpnr(findCust_input.Text).DefaultView;
             if (output_dataGrid.DataSource != null)
             {
+                output_dataGrid.DataSource = null;
+                output_dataGrid.Rows.Clear();
                 output_dataGrid.Columns[0].ReadOnly = true;
                 output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
                 updateCust_btn.Visible = true;
@@ -96,13 +116,15 @@ namespace HotelApp
 
                 if (output_dataGrid.DataSource != null)
                 {
-
+                    
                     output_dataGrid.Columns[0].ReadOnly = true;
                     output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
                     updateRes_btn.Visible = true;
-                    deleteCust_btn.Visible = true;
+                    deleteCust_btn.Visible = false;
                     updateCust_btn.Visible = false;
-                    deleteRes_btn.Visible = false;
+                    deleteRes_btn.Visible = true;
+                    output_dataGrid.DataSource = null;
+                    output_dataGrid.Rows.Clear();
                 }
             }
 
@@ -115,16 +137,25 @@ namespace HotelApp
 
         private void checkAvail_btn_Click(object sender, EventArgs e)
         {
-            string cPnr = resCust_input.Text;
-            int cabinNo = Convert.ToInt32(resCabin_comboBox.SelectedItem.ToString());
-            int rWeek = (int) resWeek_input.Value;
-
-            if (ctrl.CheckReservation(cabinNo,rWeek))
+            string cPnr = null;
+            int cabinNo = 0;
+            int rWeek = 0;
+            if (resCust_input.Text == null || resCust_input.Text == "")
             {
-                checkAvail_btn.Visible = false;
-                createRes_btn.Visible = true;
-                updateCust_btn.Visible = false;
+                System.Windows.Forms.MessageBox.Show("You have to select a customer!");
 
+            }
+           else {
+                cPnr = resCust_input.Text;
+                cabinNo = Convert.ToInt32(resCabin_comboBox.SelectedItem.ToString());
+                rWeek = (int)resWeek_input.Value;
+
+                if (ctrl.CheckReservation(cabinNo, rWeek))
+                {
+                    checkAvail_btn.Visible = true;
+                    createRes_btn.Visible = true;
+
+                }
             }
         }
 
@@ -142,10 +173,12 @@ namespace HotelApp
 
         private void findAllCust_btn_Click(object sender, EventArgs e)
         {
+            output_dataGrid.DataSource = null;
+            output_dataGrid.Rows.Clear();
             output_dataGrid.DataSource = ctrl.GetAllCustomers();
             if (output_dataGrid.DataSource != null)
             {
-
+                
                 output_dataGrid.Columns[0].ReadOnly = true;
                 output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
                 updateCust_btn.Visible = true;
@@ -217,7 +250,7 @@ namespace HotelApp
                     DataGridViewRow row = output_dataGrid.SelectedRows[0];
                     string resID = row.Cells["resID"].Value.ToString();
 
-                    if (resID != null && resID != "")
+                    if (resID != null || resID != "")
                     {
                         ctrl.DeleteReservation(resID);
                         output_dataGrid.ClearSelection();
@@ -237,9 +270,13 @@ namespace HotelApp
 
         private void findAllRes_btn_Click(object sender, EventArgs e)
         {
+            output_dataGrid.DataSource = null;
+            output_dataGrid.Rows.Clear();
+
             output_dataGrid.DataSource = ctrl.GetAllReservations();
             if (output_dataGrid.DataSource != null)
             {
+               
                 output_dataGrid.Columns[0].ReadOnly = true;
                 output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
                 updateRes_btn.Visible = true;
