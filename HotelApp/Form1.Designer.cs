@@ -389,7 +389,7 @@
             // 
             // findAllRes_btn
             // 
-            this.findAllRes_btn.Location = new System.Drawing.Point(572, 364);
+            this.findAllRes_btn.Location = new System.Drawing.Point(572, 502);
             this.findAllRes_btn.Name = "findAllRes_btn";
             this.findAllRes_btn.Size = new System.Drawing.Size(159, 34);
             this.findAllRes_btn.TabIndex = 36;

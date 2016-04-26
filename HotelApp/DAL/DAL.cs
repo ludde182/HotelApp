@@ -18,9 +18,9 @@ namespace HotelApp.DAL
         public DAL()
         {
             con.ConnectionString = "user id=root;" +
-                                                      "password=root;server=DESKTOP-54MVI8J\\SQLEXPRESS;" +
+                                                      "password=root;server=DESKTOP-LAMR8JS;" +
                                                       "Trusted_Connection=yes;" +
-                                                      "database=test; " +
+                                                      "database=database; " +
                                                       "connection timeout=30";
         }
 

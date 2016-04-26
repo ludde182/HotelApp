@@ -217,12 +217,13 @@ namespace HotelApp
                     DataGridViewRow row = output_dataGrid.SelectedRows[0];
                     string resID = row.Cells["resID"].Value.ToString();
 
-
-                    ctrl.DeleteReservation(resID);
-                    output_dataGrid.ClearSelection();
-                    findAllCust_btn.PerformClick();
-                    System.Windows.Forms.MessageBox.Show("Reservation with resID : " + resID + " is deleted!");
-
+                    if (resID != null && resID != "")
+                    {
+                        ctrl.DeleteReservation(resID);
+                        output_dataGrid.ClearSelection();
+                        findAllRes_btn.PerformClick();
+                        System.Windows.Forms.MessageBox.Show("Reservation with resID : " + resID + " is deleted!");
+                    }
                 }
             }
 
