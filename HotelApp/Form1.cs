@@ -23,7 +23,16 @@ namespace HotelApp
 
         public Form1()
         {
+          
             InitializeComponent();
+           output_dataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+
+            output_dataGrid.SelectionChanged += new EventHandler((s, e) =>
+            {
+
+            });
+            output_dataGrid.MultiSelect = false;
         }
 
 
@@ -31,13 +40,42 @@ namespace HotelApp
         {
             DataTable dt = ctrl.GetCustomerByCpnr(findCust_input.Text);
             output_dataGrid.DataSource = ctrl.GetCustomerByCpnr(findCust_input.Text).DefaultView;
+            if (output_dataGrid.DataSource != null)
+            {
+                output_dataGrid.Columns[0].ReadOnly = true;
+                output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                updateCust_btn.Visible = true;
+                deleteCust_btn.Visible = true;
+                updateRes_btn.Visible = false;
+                deleteRes_btn.Visible = false;
+                
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void updateCust_btn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (output_dataGrid.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow row = output_dataGrid.SelectedRows[0];
+                    string cPnr = row.Cells["cPnr"].Value.ToString();
+                    string cName = row.Cells["cName"].Value.ToString();
+                    string cMail = row.Cells["cMail"].Value.ToString();
 
-        }
+                    ctrl.UpdateCustomer(cPnr, cName, cMail);
+                    output_dataGrid.ClearSelection();
+                    findAllCust_btn.PerformClick();
+                    System.Windows.Forms.MessageBox.Show("Customer with cPnr: "+ cPnr +" is updated!");
+                }
+            }
 
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("You have to select a Customer!");
+
+            }
+}
         private void regCust_btn_Click(object sender, EventArgs e)
         {
             string cPnr = cPnr_input.Text;
@@ -54,7 +92,18 @@ namespace HotelApp
             if (findRes_comboBox.SelectedIndex == 0)
             {
                 string resId = findRes_input.Text;
-                output_dataGrid.DataSource = ctrl.GetReservationByResId(resId);    
+                output_dataGrid.DataSource = ctrl.GetReservationByResId(resId);
+
+                if (output_dataGrid.DataSource != null)
+                {
+
+                    output_dataGrid.Columns[0].ReadOnly = true;
+                    output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                    updateRes_btn.Visible = true;
+                    deleteCust_btn.Visible = true;
+                    updateCust_btn.Visible = false;
+                    deleteRes_btn.Visible = false;
+                }
             }
 
             else if (findRes_comboBox.SelectedIndex == 1)
@@ -74,6 +123,8 @@ namespace HotelApp
             {
                 checkAvail_btn.Visible = false;
                 createRes_btn.Visible = true;
+                updateCust_btn.Visible = false;
+
             }
         }
 
@@ -87,6 +138,116 @@ namespace HotelApp
             output_dataGrid.DataSource = ctrl.GetReservationByCpnr(cPnr);
             checkAvail_btn.Visible = true;
             createRes_btn.Visible = false;
+        }
+
+        private void findAllCust_btn_Click(object sender, EventArgs e)
+        {
+            output_dataGrid.DataSource = ctrl.GetAllCustomers();
+            if (output_dataGrid.DataSource != null)
+            {
+
+                output_dataGrid.Columns[0].ReadOnly = true;
+                output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                updateCust_btn.Visible = true;
+                deleteCust_btn.Visible = true;
+                updateRes_btn.Visible = false;
+                deleteRes_btn.Visible = false;
+            }
+        }
+
+        private void deleteCust_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (output_dataGrid.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow row = output_dataGrid.SelectedRows[0];
+                    string cPnr = row.Cells["cPnr"].Value.ToString();
+                   
+
+                    ctrl.DeleteCustomer(cPnr);
+                    output_dataGrid.ClearSelection();
+                    findAllCust_btn.PerformClick();
+                    System.Windows.Forms.MessageBox.Show("Customer with cPnr : "+ cPnr + " is deleted!");
+
+                }
+            }
+
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("You have to select a Customer!");
+
+            }
+        }
+
+        private void updateRes_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (output_dataGrid.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow row = output_dataGrid.SelectedRows[0];
+                    string resID = row.Cells["resID"].Value.ToString();
+                    string cPnr = row.Cells["cPnr"].Value.ToString();
+                    string cabinNo = row.Cells["cabinNo"].Value.ToString();
+                    string rWeek = row.Cells["rWeek"].Value.ToString();
+
+
+                    ctrl.UpdateReservation(resID, cPnr, cabinNo, rWeek);
+                    output_dataGrid.ClearSelection();
+                    findAllRes_btn.PerformClick();
+                    System.Windows.Forms.MessageBox.Show("Reservation with resID: " + resID + " is updated!");
+                }
+            }
+
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("You have to select a Reservation");
+
+            }
+
+        }
+
+        private void deleteRes_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (output_dataGrid.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow row = output_dataGrid.SelectedRows[0];
+                    string resID = row.Cells["resID"].Value.ToString();
+
+
+                    ctrl.DeleteReservation(resID);
+                    output_dataGrid.ClearSelection();
+                    findAllCust_btn.PerformClick();
+                    System.Windows.Forms.MessageBox.Show("Reservation with resID : " + resID + " is deleted!");
+
+                }
+            }
+
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("You have to select a Customer!");
+
+            }
+
+        }
+
+        private void findAllRes_btn_Click(object sender, EventArgs e)
+        {
+            output_dataGrid.DataSource = ctrl.GetAllReservations();
+            if (output_dataGrid.DataSource != null)
+            {
+                output_dataGrid.Columns[0].ReadOnly = true;
+                output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                updateRes_btn.Visible = true;
+                deleteRes_btn.Visible = true;
+                deleteCust_btn.Visible = false;
+                updateCust_btn.Visible = false;     
+             
+            }
+
         }
     }
 }

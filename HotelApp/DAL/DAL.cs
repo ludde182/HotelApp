@@ -17,10 +17,10 @@ namespace HotelApp.DAL
 
         public DAL()
         {
-            con.ConnectionString = "user id=sa;" +
-                                                      "password=root;server=localhost;" +
+            con.ConnectionString = "user id=root;" +
+                                                      "password=root;server=DESKTOP-54MVI8J\\SQLEXPRESS;" +
                                                       "Trusted_Connection=yes;" +
-                                                      "database=database; " +
+                                                      "database=test; " +
                                                       "connection timeout=30";
         }
 
@@ -126,6 +126,25 @@ namespace HotelApp.DAL
             }
         }
 
+        public DataTable GetAllReservations()
+        {
+            try
+            {
+                con.Open();
+                string query = ("select * from Reservation");
+                SqlDataAdapter da = new SqlDataAdapter(query, con);
+                DataTable table = new DataTable();
+                da.Fill(table);
+                con.Close();
+                return table;
+            }
+            catch (SqlException sqlEx)
+            {
+                System.Windows.Forms.MessageBox.Show("Database error:" + sqlEx.ToString());
+                throw sqlEx;
+            }
+        }
+
         public DataTable GetReservationByCpnr(string cPnr)
         {
             try
@@ -215,7 +234,7 @@ namespace HotelApp.DAL
             catch (SqlException sqlEx)
             {
                 sqlEx.Message.StartsWith("");
-                System.Windows.Forms.MessageBox.Show("You can't change the cPnr.");
+                System.Windows.Forms.MessageBox.Show("You have to select a Customer!");
                 if (sqlEx.Message.StartsWith(""))
                 {
                     b = false;
@@ -241,6 +260,61 @@ namespace HotelApp.DAL
                 else if (result > 0)
                     b = false;
 
+                con.Close();
+            }
+
+            catch (SqlException sqlEx)
+            {
+                sqlEx.Message.StartsWith("The INSERT statement conflicted");
+                System.Windows.Forms.MessageBox.Show("Database error" + sqlEx.ToString());
+                b = false;
+                con.Close();
+            }
+            return b;
+        }
+
+        public bool UpdateReservation(String resID, String cPnr, String cabinNo, String rWeek)
+        {
+
+            bool b = false;
+            try
+            {
+                con.Open();
+                string query = ("UPDATE Reservation SET cPnr = @cPnr, cabinNo = @cabinNO, rWeek = @rWeek WHERE resID = @cPnr");
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@resID", resID);
+                cmd.Parameters.AddWithValue("@cPnr", cPnr);
+                cmd.Parameters.AddWithValue("@cabinNo", cabinNo);
+                cmd.Parameters.AddWithValue("@rWeek", rWeek);              
+                cmd.ExecuteReader();
+                b = true;
+                con.Close();
+            }
+
+            catch (SqlException sqlEx)
+            {
+                sqlEx.Message.StartsWith("");
+                System.Windows.Forms.MessageBox.Show("Something went wrong. Make sure the Customer exists and that the reservation date is available!");
+                if (sqlEx.Message.StartsWith(""))
+                {
+                    b = false;
+                }
+                con.Close();
+            }
+            return b;
+        }
+
+        public bool DeleteReservation(string resID)
+        {
+            bool b = true;
+            try
+            {
+                con.Open();
+                string query = ("DELETE FROM Reservation WHERE resID =  @resID");
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@resID", resID);
+                cmd.ExecuteReader();
+                b = true;
                 con.Close();
             }
 

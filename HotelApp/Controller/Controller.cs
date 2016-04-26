@@ -56,7 +56,28 @@ namespace HotelApp.Controller
         {
             return dal.CheckReservation(cabinNo, rWeek);
         }
+        public bool UpdateCustomer(String cPnr, String cName, String cMail)
+        {
 
+            return dal.UpdateCustomer(cPnr, cName, cMail);
+        }
+        public bool DeleteCustomer(string cPnr)
+        {
+            return dal.DeleteCustomer(cPnr);
+        }
+        public bool UpdateReservation(String resID, String cPnr, String cabinNo, String rWeek)
+        {
+            return dal.UpdateReservation(resID, cPnr, cabinNo, rWeek);
+        }
+        public DataTable GetAllReservations()
+        {
+            return dal.GetAllReservations();
+        }
+        public bool DeleteReservation(string resID)
+        {
+
+            return dal.DeleteReservation(resID);
+        }
 
     }
 

@@ -54,9 +54,13 @@
             this.logoBox_lbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.findRes_comboBox = new System.Windows.Forms.ComboBox();
-            this.update_btn = new System.Windows.Forms.Button();
-            this.delete_btn = new System.Windows.Forms.Button();
+            this.updateCust_btn = new System.Windows.Forms.Button();
+            this.deleteCust_btn = new System.Windows.Forms.Button();
             this.createRes_btn = new System.Windows.Forms.Button();
+            this.findAllCust_btn = new System.Windows.Forms.Button();
+            this.updateRes_btn = new System.Windows.Forms.Button();
+            this.deleteRes_btn = new System.Windows.Forms.Button();
+            this.findAllRes_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resWeek_input)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output_dataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
@@ -151,7 +155,6 @@
             this.resCabin_comboBox.Name = "resCabin_comboBox";
             this.resCabin_comboBox.Size = new System.Drawing.Size(159, 25);
             this.resCabin_comboBox.TabIndex = 10;
-            resCabin_comboBox.SelectedIndex = 0;
             // 
             // resCabin_lbl
             // 
@@ -318,26 +321,26 @@
             this.findRes_comboBox.Name = "findRes_comboBox";
             this.findRes_comboBox.Size = new System.Drawing.Size(121, 25);
             this.findRes_comboBox.TabIndex = 29;
-            findRes_comboBox.SelectedIndex = 0;
             // 
-            // update_btn
+            // updateCust_btn
             // 
-            this.update_btn.Location = new System.Drawing.Point(786, 445);
-            this.update_btn.Name = "update_btn";
-            this.update_btn.Size = new System.Drawing.Size(78, 34);
-            this.update_btn.TabIndex = 30;
-            this.update_btn.Text = "Update";
-            this.update_btn.UseVisualStyleBackColor = true;
-            this.update_btn.Click += new System.EventHandler(this.button1_Click);
+            this.updateCust_btn.Location = new System.Drawing.Point(786, 445);
+            this.updateCust_btn.Name = "updateCust_btn";
+            this.updateCust_btn.Size = new System.Drawing.Size(78, 34);
+            this.updateCust_btn.TabIndex = 30;
+            this.updateCust_btn.Text = "Update";
+            this.updateCust_btn.UseVisualStyleBackColor = true;
+            this.updateCust_btn.Click += new System.EventHandler(this.updateCust_btn_Click);
             // 
-            // delete_btn
+            // deleteCust_btn
             // 
-            this.delete_btn.Location = new System.Drawing.Point(870, 445);
-            this.delete_btn.Name = "delete_btn";
-            this.delete_btn.Size = new System.Drawing.Size(78, 34);
-            this.delete_btn.TabIndex = 31;
-            this.delete_btn.Text = "Delete";
-            this.delete_btn.UseVisualStyleBackColor = true;
+            this.deleteCust_btn.Location = new System.Drawing.Point(870, 445);
+            this.deleteCust_btn.Name = "deleteCust_btn";
+            this.deleteCust_btn.Size = new System.Drawing.Size(78, 34);
+            this.deleteCust_btn.TabIndex = 31;
+            this.deleteCust_btn.Text = "Delete";
+            this.deleteCust_btn.UseVisualStyleBackColor = true;
+            this.deleteCust_btn.Click += new System.EventHandler(this.deleteCust_btn_Click);
             // 
             // createRes_btn
             // 
@@ -351,6 +354,49 @@
             this.createRes_btn.Visible = false;
             this.createRes_btn.Click += new System.EventHandler(this.createRes_btn_Click);
             // 
+            // findAllCust_btn
+            // 
+            this.findAllCust_btn.Location = new System.Drawing.Point(243, 502);
+            this.findAllCust_btn.Name = "findAllCust_btn";
+            this.findAllCust_btn.Size = new System.Drawing.Size(159, 33);
+            this.findAllCust_btn.TabIndex = 33;
+            this.findAllCust_btn.Text = "List All Customers";
+            this.findAllCust_btn.UseVisualStyleBackColor = true;
+            this.findAllCust_btn.Click += new System.EventHandler(this.findAllCust_btn_Click);
+            // 
+            // updateRes_btn
+            // 
+            this.updateRes_btn.Location = new System.Drawing.Point(786, 485);
+            this.updateRes_btn.Name = "updateRes_btn";
+            this.updateRes_btn.Size = new System.Drawing.Size(78, 34);
+            this.updateRes_btn.TabIndex = 34;
+            this.updateRes_btn.Text = "Update";
+            this.updateRes_btn.UseVisualStyleBackColor = true;
+            this.updateRes_btn.Visible = false;
+            this.updateRes_btn.Click += new System.EventHandler(this.updateRes_btn_Click);
+            // 
+            // deleteRes_btn
+            // 
+            this.deleteRes_btn.Location = new System.Drawing.Point(870, 485);
+            this.deleteRes_btn.Name = "deleteRes_btn";
+            this.deleteRes_btn.Size = new System.Drawing.Size(78, 34);
+            this.deleteRes_btn.TabIndex = 35;
+            this.deleteRes_btn.TabStop = false;
+            this.deleteRes_btn.Text = "Delete";
+            this.deleteRes_btn.UseVisualStyleBackColor = true;
+            this.deleteRes_btn.Visible = false;
+            this.deleteRes_btn.Click += new System.EventHandler(this.deleteRes_btn_Click);
+            // 
+            // findAllRes_btn
+            // 
+            this.findAllRes_btn.Location = new System.Drawing.Point(572, 364);
+            this.findAllRes_btn.Name = "findAllRes_btn";
+            this.findAllRes_btn.Size = new System.Drawing.Size(159, 34);
+            this.findAllRes_btn.TabIndex = 36;
+            this.findAllRes_btn.Text = "List All Reservations";
+            this.findAllRes_btn.UseVisualStyleBackColor = true;
+            this.findAllRes_btn.Click += new System.EventHandler(this.findAllRes_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -358,9 +404,13 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::HotelApp.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(1282, 611);
+            this.Controls.Add(this.findAllRes_btn);
+            this.Controls.Add(this.deleteRes_btn);
+            this.Controls.Add(this.updateRes_btn);
+            this.Controls.Add(this.findAllCust_btn);
             this.Controls.Add(this.createRes_btn);
-            this.Controls.Add(this.delete_btn);
-            this.Controls.Add(this.update_btn);
+            this.Controls.Add(this.deleteCust_btn);
+            this.Controls.Add(this.updateCust_btn);
             this.Controls.Add(this.findRes_comboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logoBox_lbl);
@@ -429,9 +479,13 @@
         private System.Windows.Forms.Label logoBox_lbl;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox findRes_comboBox;
-        private System.Windows.Forms.Button update_btn;
-        private System.Windows.Forms.Button delete_btn;
+        private System.Windows.Forms.Button updateCust_btn;
+        private System.Windows.Forms.Button deleteCust_btn;
         private System.Windows.Forms.Button createRes_btn;
+        private System.Windows.Forms.Button findAllCust_btn;
+        private System.Windows.Forms.Button updateRes_btn;
+        private System.Windows.Forms.Button deleteRes_btn;
+        private System.Windows.Forms.Button findAllRes_btn;
     }
 }
 
