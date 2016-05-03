@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using HotelApp.DAL;
 using System.Data;
+using HotelApp.Exception;
 
 namespace HotelApp.DAL
 {
@@ -13,8 +14,6 @@ namespace HotelApp.DAL
     class DAL
     {
         SqlConnection con = new SqlConnection();
-
-
 
         public DAL()
         {
@@ -24,7 +23,6 @@ namespace HotelApp.DAL
                                                       "database=test; " +
                                                       "connection timeout=30";
         }
-
 
         //GET ALL METHODS       
 
@@ -41,12 +39,11 @@ namespace HotelApp.DAL
                 con.Close();
                 return table;
             }
-            catch (SqlException sqlEx)
+            catch
             {
-                System.Windows.Forms.MessageBox.Show("Database error:" + sqlEx.ToString());
+                // System.Windows.Forms.MessageBox.Show("Database error:" + sqlEx.ToString());
                 con.Close();
-                throw sqlEx;
-                
+                throw new HandleException("Database Error, please contact developer.");
             }
         }
 
@@ -63,22 +60,20 @@ namespace HotelApp.DAL
                 con.Close();
                 return table;
             }
-            catch (SqlException sqlEx)
+            catch
             {
-                System.Windows.Forms.MessageBox.Show("Database error:" + sqlEx.ToString());
                 con.Close();
-                throw sqlEx;
+                throw new HandleException("Database Error, please contact developer.");
             }
         }
 
-        //FIND BY ID METHODS
+        //GET BY ID METHODS
 
-        //FIND CUSTOMER BY cPnr
+        //GET CUSTOMER BY cPnr
         public DataTable GetCustomerByCpnr(string cPnr)
         {
             try
             {
-
                 con.Open();
                 string query = ("select* from Customer where cPnr = @cPnr");
                 SqlCommand cmd = new SqlCommand(query, con);
@@ -89,16 +84,15 @@ namespace HotelApp.DAL
                 con.Close();
                 return table;
             }
-            catch (SqlException sqlEx)
+            catch
             {
-                System.Windows.Forms.MessageBox.Show("Database error:" + sqlEx.ToString());
                 con.Close();
-                throw sqlEx;
+                throw new HandleException("Database Error, please contact developer.");
             }
         }
 
-        //FIND RESERVATION BY resID
-        public DataTable GetReservationByResId(string resID) //ERROR när man skriver in ÖVER 10 tecken som resID
+        //GET RESERVATION BY resID
+        public DataTable GetReservationByResId(string resID)
         {
             try
             {
@@ -112,16 +106,14 @@ namespace HotelApp.DAL
                 con.Close();
                 return table;
             }
-            catch (SqlException sqlEx)
+            catch
             {
-                System.Windows.Forms.MessageBox.Show("Database error:" + sqlEx.ToString());
                 con.Close();
-                throw sqlEx;
+                throw new HandleException("Database Error, please contact developer.");
             }
         }
 
-
-        //FIND RESERVATION BY cPnr
+        //GET RESERVATION BY cPnr
         public DataTable GetReservationByCpnr(string cPnr)
         {
             try
@@ -136,11 +128,10 @@ namespace HotelApp.DAL
                 con.Close();
                 return table;
             }
-            catch (SqlException sqlEx)
+            catch
             {
-                System.Windows.Forms.MessageBox.Show("Database error:" + sqlEx.ToString());
                 con.Close();
-                throw sqlEx;
+                throw new HandleException("Database Error, please contact developer.");
             }
         }
 
@@ -151,7 +142,7 @@ namespace HotelApp.DAL
             try
             {
                 con.Open();
-                string query = ("SELECT * FROM Reservation WHERE cabinNo = @cabinNo AND rWeek = @rWeek  ");
+                string query = ("SELECT * FROM Reservation WHERE cabinNo = @cabinNo AND rWeek = @rWeek ");
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@cabinNo", cabinNo);
                 cmd.Parameters.AddWithValue("@rWeek", rWeek);
@@ -162,19 +153,18 @@ namespace HotelApp.DAL
                     b = true;
                 else if (table.Rows.Count > 0)
                 {
-                    System.Windows.Forms.MessageBox.Show("The option isn't available!");
+                    //System.Windows.Forms.MessageBox.Show("The option isn't available!");
                     b = false;
                 }
 
                 con.Close();
             }
 
-            catch (SqlException sqlEx)
+            catch
             {
-                sqlEx.Message.StartsWith("The INSERT statement conflicted");
-                System.Windows.Forms.MessageBox.Show("Database error" + sqlEx.ToString());
                 b = false;
                 con.Close();
+                throw new HandleException("Database Error, please contact developer.");
             }
             return b;
         }
@@ -201,48 +191,75 @@ namespace HotelApp.DAL
                 con.Close();
             }
 
-            catch (SqlException sqlEx)
+            catch
             {
-                sqlEx.Message.StartsWith("");
-                System.Windows.Forms.MessageBox.Show("You have to select a Customer!");
-                if (sqlEx.Message.StartsWith(""))
-                {
-                    b = false;
-                }
+                b = false;
                 con.Close();
+                throw new HandleException("You have to select a Customer!");
+
             }
             return b;
         }
 
-        //UPDATE RESERVATION
+        //UPDATE RESERVATION 
         public bool UpdateReservation(String resID, String cPnr, String cabinNo, String rWeek)
         {
 
             bool b = false;
             try
             {
-                con.Open();
-                string query = ("UPDATE Reservation SET cPnr = @cPnr, cabinNo = @cabinNO, rWeek = @rWeek WHERE resID = @cPnr");
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@resID", resID);
-                cmd.Parameters.AddWithValue("@cPnr", cPnr);
-                cmd.Parameters.AddWithValue("@cabinNo", cabinNo);
-                cmd.Parameters.AddWithValue("@rWeek", rWeek);
-                cmd.ExecuteReader();
-                b = true;
-                con.Close();
-            }
 
-            catch (SqlException sqlEx)
-            {
-                sqlEx.Message.StartsWith("");
-                System.Windows.Forms.MessageBox.Show("Something went wrong. Make sure the Customer exists and that the reservation date is available!");
-                if (sqlEx.Message.StartsWith(""))
-                {
-                    b = false;
-                }
+                con.Open();
+                string query = ("select* from Customer where cPnr = @cPnr");
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@cPnr", cPnr);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                da.Fill(table);
                 con.Close();
+
+                if (table.Rows.Count > 0)
+                {
+
+                    con.Open();
+                    string query1 = ("SELECT * FROM Reservation WHERE cabinNo = @cabinNo AND rWeek = @rWeek ");
+                    SqlCommand cmd1 = new SqlCommand(query1, con);
+                    cmd1.Parameters.AddWithValue("@cabinNo", cabinNo);
+                    cmd1.Parameters.AddWithValue("@rWeek", rWeek);
+                    SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                    DataTable table1 = new DataTable();
+                    da1.Fill(table1);
+
+                    if (table1.Rows.Count == 0)
+                    {
+                        string query2 = ("UPDATE Reservation SET cPnr = @cPnr, cabinNo = @cabinNo, rWeek = @rWeek WHERE resID = @resID");
+
+                        SqlCommand cmd2 = new SqlCommand(query2, con);
+                        cmd2.Parameters.AddWithValue("@resID", resID);
+                        cmd2.Parameters.AddWithValue("@cPnr", cPnr);
+                        cmd2.Parameters.AddWithValue("@cabinNo", cabinNo);
+                        cmd2.Parameters.AddWithValue("@rWeek", rWeek);
+                        cmd2.ExecuteReader();
+                        b = true;
+                        con.Close();
+                    }
+
+                }
+                else
+                {
+
+                    b = false;
+                    con.Close();
+                    throw new HandleException("Something went wrong. Make sure the Customer exists.");
+                }
             }
+            catch
+            {
+                b = false;
+                con.Close();
+                throw new HandleException("Something went wrong. Make sure the Customer and cabin exists, and that the reservation date is available!");
+            }
+            con.Close();
             return b;
         }
 
@@ -265,16 +282,11 @@ namespace HotelApp.DAL
                 b = true;
                 con.Close();
             }
-
-            catch (SqlException sqlEx)
+            catch
             {
-                sqlEx.Message.StartsWith("");
-                System.Windows.Forms.MessageBox.Show("The Customer already exists.");
-                if (sqlEx.Message.StartsWith(""))
-                {
-                    b = false;
-                }
+                b = false;
                 con.Close();
+                throw new HandleException("The Customer already exists.");
             }
             return b;
         }
@@ -297,13 +309,12 @@ namespace HotelApp.DAL
                 con.Close();
             }
 
-            catch (SqlException sqlEx)
+            catch
             {
-                sqlEx.Message.StartsWith("The INSERT statement conflicted");
-
-                System.Windows.Forms.MessageBox.Show("Reservation didn't go trough. Make sure the Customer exists in the database!");
                 b = false;
                 con.Close();
+                throw new HandleException ("Reservation didn't go trough. Make sure the Customer exists in the database!");
+
             }
             return b;
         }
@@ -325,12 +336,13 @@ namespace HotelApp.DAL
                 con.Close();
             }
 
-            catch (SqlException sqlEx)
+            catch(SqlException sqlEx)
             {
-                sqlEx.Message.StartsWith("The INSERT statement conflicted");
-                System.Windows.Forms.MessageBox.Show("Database error" + sqlEx.ToString());
                 b = false;
                 con.Close();
+                sqlEx.Message.StartsWith("The INSERT statement conflicted");
+                throw new HandleException("Database error" + sqlEx.ToString());
+               
             }
             return b;
         }
@@ -352,10 +364,11 @@ namespace HotelApp.DAL
 
             catch (SqlException sqlEx)
             {
-                sqlEx.Message.StartsWith("The INSERT statement conflicted");
-                System.Windows.Forms.MessageBox.Show("Database error" + sqlEx.ToString());
                 b = false;
                 con.Close();
+                sqlEx.Message.StartsWith("The INSERT statement conflicted");
+                throw new HandleException("Database error" + sqlEx.ToString());
+              
             }
             return b;
         }

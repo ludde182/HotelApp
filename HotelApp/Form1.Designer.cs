@@ -44,9 +44,9 @@
             this.checkAvail_btn = new System.Windows.Forms.Button();
             this.resCust_input = new System.Windows.Forms.TextBox();
             this.resCust_lbl = new System.Windows.Forms.Label();
-            this.findCustByID_btn = new System.Windows.Forms.Button();
+            this.getCustByID_btn = new System.Windows.Forms.Button();
             this.findCust_input = new System.Windows.Forms.TextBox();
-            this.findResByID_btn = new System.Windows.Forms.Button();
+            this.getResByID_btn = new System.Windows.Forms.Button();
             this.findcPnr_lbl = new System.Windows.Forms.Label();
             this.findRes_input = new System.Windows.Forms.TextBox();
             this.output_dataGrid = new System.Windows.Forms.DataGridView();
@@ -57,12 +57,14 @@
             this.updateCust_btn = new System.Windows.Forms.Button();
             this.deleteCust_btn = new System.Windows.Forms.Button();
             this.createRes_btn = new System.Windows.Forms.Button();
-            this.findAllCust_btn = new System.Windows.Forms.Button();
+            this.getAllCust_btn = new System.Windows.Forms.Button();
             this.updateRes_btn = new System.Windows.Forms.Button();
             this.deleteRes_btn = new System.Windows.Forms.Button();
-            this.findAllRes_btn = new System.Windows.Forms.Button();
-            this.createResLabel_lbl = new System.Windows.Forms.Label();
+            this.getAllRes_btn = new System.Windows.Forms.Button();
             this.CustIDLabel_lbl = new System.Windows.Forms.Label();
+            this.errorMessage_lbl = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.resWeek_input)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output_dataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
@@ -228,15 +230,15 @@
             this.resCust_lbl.TabIndex = 16;
             this.resCust_lbl.Text = "Customer ID:";
             // 
-            // findCustByID_btn
+            // getCustByID_btn
             // 
-            this.findCustByID_btn.Location = new System.Drawing.Point(243, 445);
-            this.findCustByID_btn.Name = "findCustByID_btn";
-            this.findCustByID_btn.Size = new System.Drawing.Size(159, 34);
-            this.findCustByID_btn.TabIndex = 19;
-            this.findCustByID_btn.Text = "Find Customer";
-            this.findCustByID_btn.UseVisualStyleBackColor = true;
-            this.findCustByID_btn.Click += new System.EventHandler(this.findCust_btn_Click);
+            this.getCustByID_btn.Location = new System.Drawing.Point(243, 445);
+            this.getCustByID_btn.Name = "getCustByID_btn";
+            this.getCustByID_btn.Size = new System.Drawing.Size(159, 34);
+            this.getCustByID_btn.TabIndex = 19;
+            this.getCustByID_btn.Text = "Find Customer";
+            this.getCustByID_btn.UseVisualStyleBackColor = true;
+            this.getCustByID_btn.Click += new System.EventHandler(this.findCust_btn_Click);
             // 
             // findCust_input
             // 
@@ -245,15 +247,15 @@
             this.findCust_input.Size = new System.Drawing.Size(159, 24);
             this.findCust_input.TabIndex = 18;
             // 
-            // findResByID_btn
+            // getResByID_btn
             // 
-            this.findResByID_btn.Location = new System.Drawing.Point(572, 445);
-            this.findResByID_btn.Name = "findResByID_btn";
-            this.findResByID_btn.Size = new System.Drawing.Size(159, 34);
-            this.findResByID_btn.TabIndex = 19;
-            this.findResByID_btn.Text = "Find Reservation";
-            this.findResByID_btn.UseVisualStyleBackColor = true;
-            this.findResByID_btn.Click += new System.EventHandler(this.findResByID_btn_Click);
+            this.getResByID_btn.Location = new System.Drawing.Point(572, 445);
+            this.getResByID_btn.Name = "getResByID_btn";
+            this.getResByID_btn.Size = new System.Drawing.Size(159, 34);
+            this.getResByID_btn.TabIndex = 19;
+            this.getResByID_btn.Text = "Find Reservation";
+            this.getResByID_btn.UseVisualStyleBackColor = true;
+            this.getResByID_btn.Click += new System.EventHandler(this.findResByID_btn_Click);
             // 
             // findcPnr_lbl
             // 
@@ -359,19 +361,19 @@
             this.createRes_btn.Visible = false;
             this.createRes_btn.Click += new System.EventHandler(this.createRes_btn_Click);
             // 
-            // findAllCust_btn
+            // getAllCust_btn
             // 
-            this.findAllCust_btn.Location = new System.Drawing.Point(243, 502);
-            this.findAllCust_btn.Name = "findAllCust_btn";
-            this.findAllCust_btn.Size = new System.Drawing.Size(159, 33);
-            this.findAllCust_btn.TabIndex = 33;
-            this.findAllCust_btn.Text = "List All Customers";
-            this.findAllCust_btn.UseVisualStyleBackColor = true;
-            this.findAllCust_btn.Click += new System.EventHandler(this.findAllCust_btn_Click);
+            this.getAllCust_btn.Location = new System.Drawing.Point(243, 502);
+            this.getAllCust_btn.Name = "getAllCust_btn";
+            this.getAllCust_btn.Size = new System.Drawing.Size(159, 33);
+            this.getAllCust_btn.TabIndex = 33;
+            this.getAllCust_btn.Text = "List All Customers";
+            this.getAllCust_btn.UseVisualStyleBackColor = true;
+            this.getAllCust_btn.Click += new System.EventHandler(this.findAllCust_btn_Click);
             // 
             // updateRes_btn
             // 
-            this.updateRes_btn.Location = new System.Drawing.Point(786, 485);
+            this.updateRes_btn.Location = new System.Drawing.Point(786, 445);
             this.updateRes_btn.Name = "updateRes_btn";
             this.updateRes_btn.Size = new System.Drawing.Size(78, 34);
             this.updateRes_btn.TabIndex = 34;
@@ -382,7 +384,7 @@
             // 
             // deleteRes_btn
             // 
-            this.deleteRes_btn.Location = new System.Drawing.Point(870, 485);
+            this.deleteRes_btn.Location = new System.Drawing.Point(870, 445);
             this.deleteRes_btn.Name = "deleteRes_btn";
             this.deleteRes_btn.Size = new System.Drawing.Size(78, 34);
             this.deleteRes_btn.TabIndex = 35;
@@ -392,35 +394,53 @@
             this.deleteRes_btn.Visible = false;
             this.deleteRes_btn.Click += new System.EventHandler(this.deleteRes_btn_Click);
             // 
-            // findAllRes_btn
+            // getAllRes_btn
             // 
-            this.findAllRes_btn.Location = new System.Drawing.Point(572, 502);
-            this.findAllRes_btn.Name = "findAllRes_btn";
-            this.findAllRes_btn.Size = new System.Drawing.Size(159, 34);
-            this.findAllRes_btn.TabIndex = 36;
-            this.findAllRes_btn.Text = "List All Reservations";
-            this.findAllRes_btn.UseVisualStyleBackColor = true;
-            this.findAllRes_btn.Click += new System.EventHandler(this.findAllRes_btn_Click);
-            // 
-            // createResLabel_lbl
-            // 
-            this.createResLabel_lbl.AutoSize = true;
-            this.createResLabel_lbl.Location = new System.Drawing.Point(432, 361);
-            this.createResLabel_lbl.Name = "createResLabel_lbl";
-            this.createResLabel_lbl.Size = new System.Drawing.Size(322, 17);
-            this.createResLabel_lbl.TabIndex = 37;
-            this.createResLabel_lbl.Text = "Option is available. Proceed with \"Create Reservation\"";
-            this.createResLabel_lbl.Visible = false;
+            this.getAllRes_btn.Location = new System.Drawing.Point(572, 502);
+            this.getAllRes_btn.Name = "getAllRes_btn";
+            this.getAllRes_btn.Size = new System.Drawing.Size(159, 34);
+            this.getAllRes_btn.TabIndex = 36;
+            this.getAllRes_btn.Text = "List All Reservations";
+            this.getAllRes_btn.UseVisualStyleBackColor = true;
+            this.getAllRes_btn.Click += new System.EventHandler(this.findAllRes_btn_Click);
             // 
             // CustIDLabel_lbl
             // 
             this.CustIDLabel_lbl.AutoSize = true;
             this.CustIDLabel_lbl.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.CustIDLabel_lbl.Location = new System.Drawing.Point(240, 111);
+            this.CustIDLabel_lbl.Location = new System.Drawing.Point(240, 117);
             this.CustIDLabel_lbl.Name = "CustIDLabel_lbl";
             this.CustIDLabel_lbl.Size = new System.Drawing.Size(103, 17);
             this.CustIDLabel_lbl.TabIndex = 38;
             this.CustIDLabel_lbl.Text = "ÅÅMMDD-XXXX";
+            // 
+            // errorMessage_lbl
+            // 
+            this.errorMessage_lbl.AutoSize = true;
+            this.errorMessage_lbl.Location = new System.Drawing.Point(18, 574);
+            this.errorMessage_lbl.Name = "errorMessage_lbl";
+            this.errorMessage_lbl.Size = new System.Drawing.Size(0, 17);
+            this.errorMessage_lbl.TabIndex = 39;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label2.Location = new System.Drawing.Point(569, 120);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 17);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "ÅÅMMDD-XXXX";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label3.Location = new System.Drawing.Point(240, 376);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(103, 17);
+            this.label3.TabIndex = 41;
+            this.label3.Text = "ÅÅMMDD-XXXX";
             // 
             // Form1
             // 
@@ -429,12 +449,14 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::HotelApp.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(1282, 611);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.errorMessage_lbl);
             this.Controls.Add(this.CustIDLabel_lbl);
-            this.Controls.Add(this.createResLabel_lbl);
-            this.Controls.Add(this.findAllRes_btn);
+            this.Controls.Add(this.getAllRes_btn);
             this.Controls.Add(this.deleteRes_btn);
             this.Controls.Add(this.updateRes_btn);
-            this.Controls.Add(this.findAllCust_btn);
+            this.Controls.Add(this.getAllCust_btn);
             this.Controls.Add(this.createRes_btn);
             this.Controls.Add(this.deleteCust_btn);
             this.Controls.Add(this.updateCust_btn);
@@ -445,9 +467,9 @@
             this.Controls.Add(this.output_dataGrid);
             this.Controls.Add(this.findRes_input);
             this.Controls.Add(this.findcPnr_lbl);
-            this.Controls.Add(this.findResByID_btn);
+            this.Controls.Add(this.getResByID_btn);
             this.Controls.Add(this.findCust_input);
-            this.Controls.Add(this.findCustByID_btn);
+            this.Controls.Add(this.getCustByID_btn);
             this.Controls.Add(this.resCust_lbl);
             this.Controls.Add(this.resCust_input);
             this.Controls.Add(this.checkAvail_btn);
@@ -497,9 +519,9 @@
         private System.Windows.Forms.Button checkAvail_btn;
         private System.Windows.Forms.TextBox resCust_input;
         private System.Windows.Forms.Label resCust_lbl;
-        private System.Windows.Forms.Button findCustByID_btn;
+        private System.Windows.Forms.Button getCustByID_btn;
         private System.Windows.Forms.TextBox findCust_input;
-        private System.Windows.Forms.Button findResByID_btn;
+        private System.Windows.Forms.Button getResByID_btn;
         private System.Windows.Forms.Label findcPnr_lbl;
         private System.Windows.Forms.TextBox findRes_input;
         private System.Windows.Forms.PictureBox logoBox;
@@ -509,13 +531,15 @@
         private System.Windows.Forms.Button updateCust_btn;
         private System.Windows.Forms.Button deleteCust_btn;
         private System.Windows.Forms.Button createRes_btn;
-        private System.Windows.Forms.Button findAllCust_btn;
+        private System.Windows.Forms.Button getAllCust_btn;
         private System.Windows.Forms.Button updateRes_btn;
         private System.Windows.Forms.Button deleteRes_btn;
-        private System.Windows.Forms.Button findAllRes_btn;
-        private System.Windows.Forms.Label createResLabel_lbl;
-        private System.Windows.Forms.DataGridView output_dataGrid;
+        private System.Windows.Forms.Button getAllRes_btn;
+        public System.Windows.Forms.DataGridView output_dataGrid;
         private System.Windows.Forms.Label CustIDLabel_lbl;
+        private System.Windows.Forms.Label errorMessage_lbl;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

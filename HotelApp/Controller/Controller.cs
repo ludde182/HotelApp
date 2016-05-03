@@ -18,29 +18,28 @@ namespace HotelApp.Controller
             dal = new DAL.DAL();
         }
 
+        //GET ALL METHODS
+
         public DataTable GetAllCustomers()
         {
             return dal.GetAllCustomers();
         }
 
+        public DataTable GetAllReservations()
+        {
+            return dal.GetAllReservations();
+        }
+
+        // GET BY ID METHODS
+
         public DataTable GetCustomerByCpnr(string cPnr)
         {
             return dal.GetCustomerByCpnr(cPnr);
-
         }
 
-        public bool CreateCustomer(string cPnr, string cName, string cMail)
+        public DataTable GetReservationByResId(string resID)
         {
-
-            return dal.CreateCustomer(cPnr, cName, cMail);
-
-        }
-
-        public bool CreateReservation(string cPnr, int cabinNo, int week)
-        {
-
-            return dal.CreateReservation(cPnr, cabinNo, week);
-
+            return dal.GetReservationByResId(resID);
         }
 
         public DataTable GetReservationByCpnr(string cPnr)
@@ -48,34 +47,46 @@ namespace HotelApp.Controller
             return dal.GetReservationByCpnr(cPnr);
         }
 
-        public DataTable GetReservationByResId(string resID)
-        {
-            return dal.GetReservationByResId(resID);
-        }
+        //CHECK AVAILABILITY METHOD
+
         public bool CheckReservation(int cabinNo, int rWeek)
         {
             return dal.CheckReservation(cabinNo, rWeek);
         }
+
+        //UPDATE METHODS
+
         public bool UpdateCustomer(String cPnr, String cName, String cMail)
         {
-
             return dal.UpdateCustomer(cPnr, cName, cMail);
         }
-        public bool DeleteCustomer(string cPnr)
-        {
-            return dal.DeleteCustomer(cPnr);
-        }
+
         public bool UpdateReservation(String resID, String cPnr, String cabinNo, String rWeek)
         {
             return dal.UpdateReservation(resID, cPnr, cabinNo, rWeek);
         }
-        public DataTable GetAllReservations()
+
+        //CREATE METHODS
+
+        public bool CreateCustomer(string cPnr, string cName, string cMail)
         {
-            return dal.GetAllReservations();
+            return dal.CreateCustomer(cPnr, cName, cMail);
         }
+
+        public bool CreateReservation(string cPnr, int cabinNo, int week)
+        {
+            return dal.CreateReservation(cPnr, cabinNo, week);
+        }
+
+        //DELETE MeTHODS      
+
+        public bool DeleteCustomer(string cPnr)
+        {
+            return dal.DeleteCustomer(cPnr);
+        }
+
         public bool DeleteReservation(string resID)
         {
-
             return dal.DeleteReservation(resID);
         }
 

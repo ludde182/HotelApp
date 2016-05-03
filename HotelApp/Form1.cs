@@ -12,8 +12,7 @@ using HotelApp;
 using HotelApp.Controller;
 using HotelApp.Model;
 using System.Net;
-using HotelApp.Utility;
-
+using HotelApp.Exception;
 
 namespace HotelApp
 {
@@ -21,12 +20,10 @@ namespace HotelApp
     {
 
         Controller.Controller ctrl = new Controller.Controller();
-        Utility.Utility ut = new Utility.Utility();
 
+        public Form1(String c) { }
         public Form1()
         {
-
-
 
             InitializeComponent();
             output_dataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -36,201 +33,234 @@ namespace HotelApp
             {
 
             });
-            output_dataGrid.MultiSelect = false;
-            createResLabel_lbl.Visible = false;
 
+            output_dataGrid.MultiSelect = false;
+            
+
+            //HIDE CREATE RES
             resCust_input.TextChanged += new EventHandler((s, e) =>
             {
                 createRes_btn.Visible = false;
-                createResLabel_lbl.Visible = false;
+     
             });
 
             resCabin_comboBox.TextChanged += new EventHandler((s, e) =>
             {
                 createRes_btn.Visible = false;
-                createResLabel_lbl.Visible = false;
+ 
             });
 
             resWeek_input.TextChanged += new EventHandler((s, e) =>
             {
                 createRes_btn.Visible = false;
-                createResLabel_lbl.Visible = false;
+
             });
             findRes_comboBox.SelectedIndex = 0;
             resCabin_comboBox.SelectedIndex = 0;
 
         }
 
-        //FIND ALL METHODS
+        //CLEAR METHOD
+        private void clearFields()
+        {
+            output_dataGrid.DataSource = null;
+            output_dataGrid.Rows.Clear();
+            errorMessage_lbl.Text = null;
+        }
 
-        //FIND ALL CUSTOMERS
+
+        //GET ALL METHODS
+
+        //GET ALL CUSTOMERS
         private void findAllCust_btn_Click(object sender, EventArgs e)
         {
-            findAllCust_btn.Enabled = false;
-            output_dataGrid.DataSource = null;
-            output_dataGrid.Rows.Clear();
-            output_dataGrid.DataSource = ctrl.GetAllCustomers();
-            if (output_dataGrid.DataSource != null)
+            getAllCust_btn.Enabled = false;
+            clearFields();
+            try
             {
+                output_dataGrid.DataSource = ctrl.GetAllCustomers();
+                if (output_dataGrid.DataSource != null)
+                {
 
-                output_dataGrid.Columns[0].ReadOnly = true;
-                output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
-                updateCust_btn.Visible = true;
-                deleteCust_btn.Visible = true;
-                updateRes_btn.Visible = false;
-                deleteRes_btn.Visible = false;
+                    output_dataGrid.Columns[0].ReadOnly = true;
+                    output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                    updateCust_btn.Visible = true;
+                    deleteCust_btn.Visible = true;
+                    updateRes_btn.Visible = false;
+                    deleteRes_btn.Visible = false;
+                }
             }
-            findAllCust_btn.Enabled = true;
+            catch (HandleException err)
+            {
+                errorMessage_lbl.Text = err.errMessage;
+            }
+
+            getAllCust_btn.Enabled = true;
         }
 
-        //FIND ALL RESERVATIONS
+        //GET ALL RESERVATIONS
         private void findAllRes_btn_Click(object sender, EventArgs e)
         {
-            findAllRes_btn.Enabled = false;
-            output_dataGrid.DataSource = null;
-            output_dataGrid.Rows.Clear();
-            output_dataGrid.DataSource = ctrl.GetAllReservations();
+            getAllRes_btn.Enabled = false;
+            clearFields();
 
-
-            if (output_dataGrid.DataSource != null)
+            try
             {
+                output_dataGrid.DataSource = ctrl.GetAllReservations();
 
-                output_dataGrid.Columns[0].ReadOnly = true;
-                output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
-                updateRes_btn.Visible = true;
-                deleteRes_btn.Visible = true;
-                deleteCust_btn.Visible = false;
-                updateCust_btn.Visible = false;
 
+                if (output_dataGrid.DataSource != null)
+                {
+
+                    output_dataGrid.Columns[0].ReadOnly = true;
+                    output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                    updateRes_btn.Visible = true;
+                    deleteRes_btn.Visible = true;
+                    deleteCust_btn.Visible = false;
+                    updateCust_btn.Visible = false;
+
+                }
             }
-            else
+            catch (HandleException err)
             {
-                System.Windows.Forms.MessageBox.Show("No reservations found");
-
+                errorMessage_lbl.Text = err.errMessage;
             }
-            findAllRes_btn.Enabled = true;
+            getAllRes_btn.Enabled = true;
 
         }
 
-        //FIND BY ID METHODS
+        //GET BY ID METHODS
 
-        //FIND CUSTOMER BY cPnr
+        //GET CUSTOMER BY cPnr
         private void findCust_btn_Click(object sender, EventArgs e)
         {
-            findCustByID_btn.Enabled = false;
-            output_dataGrid.DataSource = null;
-            output_dataGrid.Rows.Clear();
-            DataTable dt = ctrl.GetCustomerByCpnr(findCust_input.Text);
-            output_dataGrid.DataSource = ctrl.GetCustomerByCpnr(findCust_input.Text).DefaultView;
-            if (output_dataGrid.Rows.Count > 1)
-            {
-                output_dataGrid.Columns[0].ReadOnly = true;
-                output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
-                updateCust_btn.Visible = true;
-                deleteCust_btn.Visible = true;
-                updateRes_btn.Visible = false;
-                deleteRes_btn.Visible = false;
+            getCustByID_btn.Enabled = false;
+            clearFields();
 
-            }
-
-            else
+            try
             {
-                System.Windows.Forms.MessageBox.Show("Could not find the Customer with cPnr: " + findCust_input.Text);
+                output_dataGrid.DataSource = ctrl.GetCustomerByCpnr(findCust_input.Text);
+                if (output_dataGrid.Rows.Count > 1)
+                {
+                    output_dataGrid.Columns[0].ReadOnly = true;
+                    output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                    updateCust_btn.Visible = true;
+                    deleteCust_btn.Visible = true;
+                    updateRes_btn.Visible = false;
+                    deleteRes_btn.Visible = false;
+                }
+                else
+                {
+                    errorMessage_lbl.Text = "The Customer " + findCust_input.Text + " does not exist.";
+                }
             }
-            findCustByID_btn.Enabled = true;
+            catch (HandleException err)
+            {
+                MessageBox.Show(err.errMessage);
+            }
+            getCustByID_btn.Enabled = true;
         }
 
 
-        //FIND RESERVATION BY resID OR cPnr   
+        //GET RESERVATION BY resID OR cPnr   
         private void findResByID_btn_Click(object sender, EventArgs e)
         {
-            findResByID_btn.Enabled = false;
+            getResByID_btn.Enabled = false;
+            clearFields();
 
-            if (findRes_comboBox.SelectedIndex == 0)
+            try
             {
-                string resId = findRes_input.Text;
-                output_dataGrid.DataSource = null;
-                output_dataGrid.Rows.Clear();
-
-                if(resId.Length < 10)
-                output_dataGrid.DataSource = ctrl.GetReservationByResId(resId);
-
-                if (output_dataGrid.Rows.Count > 1)
+                if (findRes_comboBox.SelectedIndex == 0)
                 {
+                    string resId = findRes_input.Text;
+                    clearFields();
 
-                    output_dataGrid.Columns[0].ReadOnly = true;
-                    output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
-                    updateRes_btn.Visible = true;
-                    deleteCust_btn.Visible = false;
-                    updateCust_btn.Visible = false;
-                    deleteRes_btn.Visible = true;
+                    if (resId.Length < 10)
+                        output_dataGrid.DataSource = ctrl.GetReservationByResId(resId);
 
+                    if (output_dataGrid.Rows.Count > 1)
+                    {
+                        output_dataGrid.Columns[0].ReadOnly = true;
+                        output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                        updateRes_btn.Visible = true;
+                        deleteCust_btn.Visible = false;
+                        updateCust_btn.Visible = false;
+                        deleteRes_btn.Visible = true;
+                    }
+                    else
+                    {
+                        errorMessage_lbl.Text = ("Could not find the reservation with the resID: " + findRes_input.Text);
+                    }
                 }
 
-                else
+                else if (findRes_comboBox.SelectedIndex == 1)
                 {
-                    System.Windows.Forms.MessageBox.Show("Could not find the reservation with the resID: " + findRes_input.Text);
+                    string cPnr = findRes_input.Text;
+                    clearFields();
+
+                    if (cPnr.Length < 12)
+                        output_dataGrid.DataSource = ctrl.GetReservationByCpnr(cPnr);
+
+                    if (output_dataGrid.Rows.Count > 1)
+                    {
+                        output_dataGrid.Columns[0].ReadOnly = true;
+                        output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
+                        updateRes_btn.Visible = true;
+                        deleteCust_btn.Visible = false;
+                        updateCust_btn.Visible = false;
+                        deleteRes_btn.Visible = true;
+                    }
+                    else
+                    {
+                        errorMessage_lbl.Text = ("Could not find the reservation with the cPnr: " + findRes_input.Text);
+                    }
                 }
             }
 
-
-            else if (findRes_comboBox.SelectedIndex == 1)
+            catch (HandleException err)
             {
-                string cPnr = findRes_input.Text;
-                output_dataGrid.DataSource = null;
-                output_dataGrid.Rows.Clear();
-
-                if (cPnr.Length < 12)
-                    output_dataGrid.DataSource = ctrl.GetReservationByCpnr(cPnr);
-
-                if (output_dataGrid.Rows.Count > 1)
-                {
-
-                    output_dataGrid.Columns[0].ReadOnly = true;
-                    output_dataGrid.Columns[0].DefaultCellStyle.ForeColor = Color.LightBlue;
-                    updateRes_btn.Visible = true;
-                    deleteCust_btn.Visible = false;
-                    updateCust_btn.Visible = false;
-                    deleteRes_btn.Visible = true;
-
-                }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show("Could not find the reservation with the cPnr: " + findRes_input.Text);
-                }
+                MessageBox.Show(err.errMessage);
             }
-            findResByID_btn.Enabled = true;
+            getResByID_btn.Enabled = true;
         }
 
         //CHECK AVAILABILITY METHOD
-
         private void checkAvail_btn_Click(object sender, EventArgs e)
         {
             checkAvail_btn.Enabled = false;
-            string cPnr = null;
-            int cabinNo = 0;
-            int rWeek = 0;
-            if (resCust_input.Text == null || resCust_input.Text == "" || resCabin_comboBox.Text == null || resCabin_comboBox.Text == "")
+            try
             {
-                System.Windows.Forms.MessageBox.Show("You have to select a customer, a cabin and a week!");
-
-            }
-            else {
-                cPnr = resCust_input.Text;
-                cabinNo = resCabin_comboBox.SelectedIndex + 1;
-                rWeek = (int)resWeek_input.Value;
-
-                if (ctrl.CheckReservation(cabinNo, rWeek))
+                string cPnr = null;
+                int cabinNo = 0;
+                int rWeek = 0;
+                if (resCust_input.Text == null || resCust_input.Text == "" || resCabin_comboBox.Text == null || resCabin_comboBox.Text == "")
                 {
-                    checkAvail_btn.Visible = true;
-                    createRes_btn.Visible = true;
-                    createResLabel_lbl.Visible = true;
-
+                    errorMessage_lbl.Text = "Error! You have to select a customer, a cabin and a week!";
+                    checkAvail_btn.Enabled = true;
                 }
+                else {
+                    cPnr = resCust_input.Text;
+                    cabinNo = resCabin_comboBox.SelectedIndex + 1;
+                    rWeek = (int)resWeek_input.Value;
+
+                    if (ctrl.CheckReservation(cabinNo, rWeek))
+                    {
+                        checkAvail_btn.Visible = true;
+                        createRes_btn.Visible = true;
+                        errorMessage_lbl.Text = "The option is available, proceed with \"Create Reservation\".";
+                    }
+                    else
+                    {
+                        errorMessage_lbl.Text = "Error! The option isn't available!";
+                    }
+                }
+            }
+            catch (HandleException err)
+            {
+                MessageBox.Show(err.errMessage);
             }
             checkAvail_btn.Enabled = true;
         }
-
 
         //UPDATE METHODS
 
@@ -249,21 +279,24 @@ namespace HotelApp
 
                     ctrl.UpdateCustomer(cPnr, cName, cMail);
                     output_dataGrid.ClearSelection();
-                    findAllCust_btn.PerformClick();
-                    System.Windows.Forms.MessageBox.Show("Customer with cPnr: " + cPnr + " is updated!");
+                    output_dataGrid.DataSource = ctrl.GetCustomerByCpnr(cPnr);
+
+                    errorMessage_lbl.Text = "Success! Customer with cPnr: " + cPnr + " is updated!";
+                }
+                else
+                {
+                    errorMessage_lbl.Text = "Error! You have to select a Customer!";
                 }
             }
 
-            catch
+            catch (HandleException err)
             {
-                System.Windows.Forms.MessageBox.Show("You have to select a Customer!");
-
+                errorMessage_lbl.Text = err.Message;
             }
             updateCust_btn.Enabled = true;
         }
 
         //UPDATE RESERVATION
-
         private void updateRes_btn_Click(object sender, EventArgs e)
         {
             updateRes_btn.Enabled = false;
@@ -279,17 +312,26 @@ namespace HotelApp
                     string rWeek = row.Cells["rWeek"].Value.ToString();
 
 
-                    ctrl.UpdateReservation(resID, cPnr, cabinNo, rWeek);
-                    output_dataGrid.ClearSelection();
-                    findAllRes_btn.PerformClick();
-                    System.Windows.Forms.MessageBox.Show("Reservation with resID: " + resID + " is updated!");
+
+                    if (ctrl.UpdateReservation(resID, cPnr, cabinNo, rWeek))
+                    {
+                        output_dataGrid.ClearSelection();
+                        getAllRes_btn.PerformClick();
+                        errorMessage_lbl.Text = "Success! Reservation with resID: " + resID + " is updated!";
+                    }
+                    else {
+                        errorMessage_lbl.Text = "Something went wrong. Make sure the Customer and cabin exists, and that the reservation date is available!";
+                    }
+                }
+                else
+                {
+                    errorMessage_lbl.Text = "Error! You have to select a Reservation";
                 }
             }
 
-            catch
+            catch (HandleException err)
             {
-                System.Windows.Forms.MessageBox.Show("You have to select a Reservation");
-
+                errorMessage_lbl.Text = err.errMessage;
             }
             updateRes_btn.Enabled = true;
         }
@@ -305,65 +347,77 @@ namespace HotelApp
             string cPnr = cPnr_input.Text;
             string cName = cName_input.Text;
             string cMail = cMail_input.Text;
-
-            bool b = false;
+            bool validEmail = false;
             try
             {
-                var addr = new System.Net.Mail.MailAddress(cMail);
-                b = (addr.Address == cMail);
-            }
-            catch
-            {
-                b = false;
-            }
-
-            if (cPnr != null && cPnr != "" && cName != null && cName != "" && cMail != null && cMail != "")
-            {
-
-                if ((cPnr.Count(char.IsDigit) == 10) && (cPnr[6] == '-') && (cName.Count(char.IsDigit) == 0 && b))
+                try
                 {
-                    if (ctrl.CreateCustomer(cPnr, cName, cMail))
+                    var addr = new System.Net.Mail.MailAddress(cMail);
+                    validEmail = (addr.Address == cMail);
+                }
+                catch
+                {
+                    validEmail = false;
+                }
+                if (cPnr != null && cPnr != "" && cName != null && cName != "" && cMail != null && cMail != "")
+                {
+                    if ((validEmail && cPnr.Count(char.IsDigit) == 10) && (cPnr[6] == '-') && (cName.Count(char.IsDigit) == 0) && cPnr.Length == 11)
                     {
-                        System.Windows.Forms.MessageBox.Show("Customer with cPnr: " + cPnr + " is created!");
+                        if (ctrl.CreateCustomer(cPnr, cName, cMail))
+                        {
+                            errorMessage_lbl.Text = "Success! Customer with cPnr: " + cPnr + " is created!";
+                        }
+                        output_dataGrid.DataSource = ctrl.GetCustomerByCpnr(cPnr);
                     }
-                    output_dataGrid.DataSource = ctrl.GetAllCustomers();
+                    else
+                    {
+                        errorMessage_lbl.Text = "Incorrect inputs! Example: cPnr: \"911208-0131\" - Name: \"Mats Ucan\" - Mail: \"Erdogan@gmail.com\"";
+                    }
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Incorrect inputs! Example - cPnr: \"911208-0131\" Name: \"Mats Ucan\" Mail: \"Erdogan@gmail.com\"");
+                    errorMessage_lbl.Text = "Error! You have to fill out every field!";
                 }
-
             }
-            else
+            catch (HandleException err)
             {
-                System.Windows.Forms.MessageBox.Show("You have to fill out every field!");
+                errorMessage_lbl.Text = err.errMessage;
             }
-
-            //  ut.regCust(cPnr, cName, cMail);
-
             createCust_btn.Enabled = true;
         }
 
         //CREATE RESERVATION
         private void createRes_btn_Click(object sender, EventArgs e)
         {
-            createRes_btn.Enabled = false;
-            createResLabel_lbl.Visible = false;
+            createRes_btn.Enabled = false;          
             string cPnr = resCust_input.Text;
             int cabinNo = resCabin_comboBox.SelectedIndex + 1;
             int rWeek = (int)resWeek_input.Value;
 
-            if (ctrl.CreateReservation(cPnr, cabinNo, rWeek))
+            try
             {
-                output_dataGrid.DataSource = ctrl.GetReservationByCpnr(cPnr);
-                checkAvail_btn.Visible = true;
-                createRes_btn.Visible = false;
-                createRes_btn.Enabled = true;
+
+                if (ctrl.CreateReservation(cPnr, cabinNo, rWeek))
+                {
+                    output_dataGrid.DataSource = ctrl.GetReservationByCpnr(cPnr);
+                    checkAvail_btn.Visible = true;
+                    createRes_btn.Visible = false;
+                    createRes_btn.Enabled = true;
+                    errorMessage_lbl.Text = "Success! Reservation for cPnr: " + cPnr + " in Cabin: " + resCabin_comboBox.Text + " during week: " + rWeek + " is registred.";
+                }
+                else
+                {
+                    findAllCust_btn_Click(sender, e);
+                    createRes_btn.Visible = false;
+
+                }
             }
-            else
+            catch (HandleException err)
             {
-                findAllCust_btn_Click(sender, e);
+                errorMessage_lbl.Text = err.errMessage;
+                
             }
+            createRes_btn.Enabled = true;
         }
 
         //DELETE METHODS
@@ -382,15 +436,19 @@ namespace HotelApp
 
                     ctrl.DeleteCustomer(cPnr);
                     output_dataGrid.ClearSelection();
-                    findAllCust_btn.PerformClick();
-                    System.Windows.Forms.MessageBox.Show("Customer with cPnr : " + cPnr + " is deleted!");
+                    getAllCust_btn.PerformClick();
+                    errorMessage_lbl.Text = "Customer with cPnr : " + cPnr + " is deleted!";
 
+                }
+                else
+                {
+                    errorMessage_lbl.Text = "You have to select a Customer!";
                 }
             }
 
-            catch
+            catch (HandleException err)
             {
-                System.Windows.Forms.MessageBox.Show("You have to select a Customer!");
+                MessageBox.Show(err.errMessage);
 
             }
             deleteCust_btn.Enabled = true;
@@ -411,16 +469,15 @@ namespace HotelApp
                     {
                         ctrl.DeleteReservation(resID);
                         output_dataGrid.ClearSelection();
-                        findAllRes_btn.PerformClick();
-                        System.Windows.Forms.MessageBox.Show("Reservation with resID : " + resID + " is deleted!");
+                        getAllRes_btn.PerformClick();
+                        MessageBox.Show("Reservation with resID : " + resID + " is deleted!");
                     }
                 }
             }
 
-            catch
+            catch (HandleException err)
             {
-                System.Windows.Forms.MessageBox.Show("You have to select a Customer!");
-
+                MessageBox.Show(err.errMessage);
             }
             deleteRes_btn.Enabled = true;
 
