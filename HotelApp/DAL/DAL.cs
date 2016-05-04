@@ -41,7 +41,6 @@ namespace HotelApp.DAL
             }
             catch
             {
-                // System.Windows.Forms.MessageBox.Show("Database error:" + sqlEx.ToString());
                 con.Close();
                 throw new HandleException("Database Error, please contact developer.");
             }
@@ -149,14 +148,12 @@ namespace HotelApp.DAL
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 da.Fill(table);
-                if (table.Rows.Count == 0)
+                if (table.Rows.Count == 0) //Makes sure the option is available
                     b = true;
                 else if (table.Rows.Count > 0)
                 {
-                    //System.Windows.Forms.MessageBox.Show("The option isn't available!");
                     b = false;
                 }
-
                 con.Close();
             }
 
@@ -178,7 +175,6 @@ namespace HotelApp.DAL
             bool b = false;
             try
             {
-
                 con.Open();
                 string query = ("UPDATE Customer SET cName = @cName, cMail = @cMail WHERE cPnr = @cPnr");
                 SqlCommand cmd = new SqlCommand(query, con);
@@ -187,7 +183,6 @@ namespace HotelApp.DAL
                 cmd.Parameters.AddWithValue("@cMail", cMail);
                 cmd.ExecuteReader();
                 b = true;
-
                 con.Close();
             }
 
@@ -196,7 +191,6 @@ namespace HotelApp.DAL
                 b = false;
                 con.Close();
                 throw new HandleException("You have to select a Customer!");
-
             }
             return b;
         }
@@ -218,7 +212,7 @@ namespace HotelApp.DAL
                 da.Fill(table);
                 con.Close();
 
-                if (table.Rows.Count > 0)
+                if (table.Rows.Count > 0) //Checks if customer exists
                 {
 
                     con.Open();
@@ -230,7 +224,7 @@ namespace HotelApp.DAL
                     DataTable table1 = new DataTable();
                     da1.Fill(table1);
 
-                    if (table1.Rows.Count == 0)
+                    if (table1.Rows.Count == 0) //Makes sure the reservation option is available
                     {
                         string query2 = ("UPDATE Reservation SET cPnr = @cPnr, cabinNo = @cabinNo, rWeek = @rWeek WHERE resID = @resID");
 
@@ -243,14 +237,12 @@ namespace HotelApp.DAL
                         b = true;
                         con.Close();
                     }
-
                 }
                 else
                 {
-
                     b = false;
                     con.Close();
-                    throw new HandleException("Something went wrong. Make sure the Customer exists.");
+                    throw new HandleException("Something went wrong. Make sure the Customer exists and that the reservation date is available.");
                 }
             }
             catch
@@ -313,7 +305,7 @@ namespace HotelApp.DAL
             {
                 b = false;
                 con.Close();
-                throw new HandleException ("Reservation didn't go trough. Make sure the Customer exists in the database!");
+                throw new HandleException("Reservation didn't go trough. Make sure the Customer exists in the database!");
 
             }
             return b;
@@ -336,13 +328,13 @@ namespace HotelApp.DAL
                 con.Close();
             }
 
-            catch(SqlException sqlEx)
+            catch (SqlException sqlEx)
             {
                 b = false;
                 con.Close();
                 sqlEx.Message.StartsWith("The INSERT statement conflicted");
                 throw new HandleException("Database error" + sqlEx.ToString());
-               
+
             }
             return b;
         }
@@ -368,7 +360,7 @@ namespace HotelApp.DAL
                 con.Close();
                 sqlEx.Message.StartsWith("The INSERT statement conflicted");
                 throw new HandleException("Database error" + sqlEx.ToString());
-              
+
             }
             return b;
         }

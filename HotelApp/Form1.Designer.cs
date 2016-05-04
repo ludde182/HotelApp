@@ -62,7 +62,7 @@
             this.deleteRes_btn = new System.Windows.Forms.Button();
             this.getAllRes_btn = new System.Windows.Forms.Button();
             this.CustIDLabel_lbl = new System.Windows.Forms.Label();
-            this.errorMessage_lbl = new System.Windows.Forms.Label();
+            this.infoMessage_lbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.resWeek_input)).BeginInit();
@@ -414,13 +414,13 @@
             this.CustIDLabel_lbl.TabIndex = 38;
             this.CustIDLabel_lbl.Text = "ÅÅMMDD-XXXX";
             // 
-            // errorMessage_lbl
+            // infoMessage_lbl
             // 
-            this.errorMessage_lbl.AutoSize = true;
-            this.errorMessage_lbl.Location = new System.Drawing.Point(18, 574);
-            this.errorMessage_lbl.Name = "errorMessage_lbl";
-            this.errorMessage_lbl.Size = new System.Drawing.Size(0, 17);
-            this.errorMessage_lbl.TabIndex = 39;
+            this.infoMessage_lbl.AutoSize = true;
+            this.infoMessage_lbl.Location = new System.Drawing.Point(18, 574);
+            this.infoMessage_lbl.Name = "infoMessage_lbl";
+            this.infoMessage_lbl.Size = new System.Drawing.Size(0, 17);
+            this.infoMessage_lbl.TabIndex = 39;
             // 
             // label2
             // 
@@ -451,7 +451,7 @@
             this.ClientSize = new System.Drawing.Size(1282, 611);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.errorMessage_lbl);
+            this.Controls.Add(this.infoMessage_lbl);
             this.Controls.Add(this.CustIDLabel_lbl);
             this.Controls.Add(this.getAllRes_btn);
             this.Controls.Add(this.deleteRes_btn);
@@ -537,7 +537,7 @@
         private System.Windows.Forms.Button getAllRes_btn;
         public System.Windows.Forms.DataGridView output_dataGrid;
         private System.Windows.Forms.Label CustIDLabel_lbl;
-        private System.Windows.Forms.Label errorMessage_lbl;
+        private System.Windows.Forms.Label infoMessage_lbl;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
     }
