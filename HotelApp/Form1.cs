@@ -21,7 +21,6 @@ namespace HotelApp
 
         Controller.Controller ctrl = new Controller.Controller();
 
-        public Form1(String c) { }
         public Form1()
         {
 
@@ -37,7 +36,7 @@ namespace HotelApp
             output_dataGrid.MultiSelect = false;
 
 
-            //HIDE createRRes_btn if text changes
+            //HIDE createRes_btn if text changes
             resCust_input.TextChanged += new EventHandler((s, e) =>
             {
                 createRes_btn.Visible = false;
@@ -67,7 +66,6 @@ namespace HotelApp
             output_dataGrid.Rows.Clear();
             infoMessage_lbl.Text = null;
         }
-
 
         //GET ALL METHODS
 
@@ -373,16 +371,21 @@ namespace HotelApp
                             string cabinNo = row.Cells["cabinNo"].Value.ToString();
                             string rWeek = row.Cells["rWeek"].Value.ToString();
 
-
-
-                            if (ctrl.UpdateReservation(resID, cPnr, cabinNo, rWeek)) // Bool check from DAL
+                            if (cabinNo.Count(char.IsDigit) == 1 && cabinNo.Length == 1)
                             {
-                                output_dataGrid.ClearSelection();
-                                getAllRes_btn.PerformClick();
-                                infoMessage_lbl.Text = "Success! Reservation with resID: " + resID + " is updated!";
+                                if (ctrl.UpdateReservation(resID, cPnr, cabinNo, rWeek)) // Bool check from DAL
+                                {
+                                    output_dataGrid.ClearSelection();
+                                    getAllRes_btn.PerformClick();
+                                    infoMessage_lbl.Text = "Success! Reservation with resID: " + resID + " is updated!";
+                                }
+                                else {
+                                    infoMessage_lbl.Text = "Something went wrong. Make sure the Customer and cabin exists, and that the reservation date is available!";
+                                }
                             }
                             else {
                                 infoMessage_lbl.Text = "Something went wrong. Make sure the Customer and cabin exists, and that the reservation date is available!";
+                            }
                             }
                         }
                     }
@@ -390,7 +393,6 @@ namespace HotelApp
                     {
                         infoMessage_lbl.Text = "Error! You have to select a Reservation";
                     }
-                }
             }
 
             catch (HandleException err)
@@ -573,7 +575,7 @@ namespace HotelApp
                                 ctrl.DeleteReservation(resID);
                                 output_dataGrid.ClearSelection();
                                 getAllRes_btn.PerformClick();
-                                MessageBox.Show("Reservation with resID : " + resID + " is deleted!");
+                                infoMessage_lbl.Text = "Reservation with resID : " + resID + " is deleted!";
                             }
                         }
                     }
